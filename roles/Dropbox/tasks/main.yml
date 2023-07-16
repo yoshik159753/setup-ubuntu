@@ -1,0 +1,16 @@
+- name: Setup 32bit
+  set_fact:
+    DROPBOX_ARCHITECTURE: i386
+  when: "ansible_architecture == 'x86'"
+
+- name: Setup 64bit
+  set_fact:
+    DROPBOX_ARCHITECTURE: amd64
+  when: "ansible_architecture == 'x86_64'"
+
+- name: Install
+  become: yes
+  apt:
+    deb: "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_{{ DROPBOX_ARCHITECTURE }}.deb"
+  notify:
+    - Notification about installation
