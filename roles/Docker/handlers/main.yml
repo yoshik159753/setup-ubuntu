@@ -1,0 +1,12 @@
+- name: Verify docker is installed correctly
+  debug: msg="Install後は sudo docker run hello-world で起動を確認できます"
+
+- name: Restart docker service
+  become: yes
+  service:
+    name: docker
+    state: restarted
+
+- name: Notify Re-login
+  debug:
+    msg: "再ログインすることでユーザーの Docker グループが有効になります"

@@ -1,0 +1,59 @@
+- name: Install packages
+  become: yes
+  apt:
+    name: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
+    state: present
+
+- name: Add Docker’s official GPG key.
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    state: present
+
+- name: Use the following command to set up the stable repository.
+  become: yes
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename }} stable"
+    filename: docker
+    state: present
+    update_cache: yes
+
+- name: Install the latest version of Docker CE.
+  become: yes
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: yes
+  notify:
+    - Verify docker is installed correctly
+
+- name: Add docker group
+  become: yes
+  group:
+    name: docker
+    state: present
+  notify:
+    - Restart docker service
+
+- name: Apply docker group
+  become: yes
+  user:
+    name: "{{ ansible_env.USER }}"
+    groups: docker
+    append: yes
+    state: present
+  notify:
+    - Notify Re-login
+
+# ref. https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
+
+- name: Install docker compose
+  become: yes
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ DOCKER_COMPOSE_VER }}/docker-compose-{{ ansible_system }}-{{ ansible_architecture }}"
+    dest: "/usr/local/bin/docker-compose"
+    mode: "+x"
+    validate_certs: no
+
+# ref. https://docs.docker.com/compose/install/

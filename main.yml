@@ -1,0 +1,8 @@
+- hosts:
+    - localhost
+  vars:
+    DOCKER_COMPOSE_VER: v2.20.0
+  roles:
+    - apt-get-upgrade
+    - Audacity
+    - Docker
