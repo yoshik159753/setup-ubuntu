@@ -30,4 +30,16 @@
 |FFmpeg
 |動画と音声を記録・変換・再生するためのフリーソフトウェア
 |-
+
+|Geeqie
+|Image Viewer
+|-
+
+|Chromium
+|Web Browser
+|-
+
+|VLC
+|Media Player
+|-
 |===
