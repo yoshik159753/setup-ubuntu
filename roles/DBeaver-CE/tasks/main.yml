@@ -1,0 +1,13 @@
+- name: Add ppa for dbeaver-ce
+  become: yes
+  apt_repository:
+    repo: ppa:serge-rider/dbeaver-ce
+    state: present
+    update_cache: yes
+
+- name: Install dbeaver-ce
+  become: yes
+  apt:
+    name: dbeaver-ce
+    state: present
+    update_cache: yes

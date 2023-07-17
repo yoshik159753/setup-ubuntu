@@ -8,6 +8,7 @@
     GIT_VERSION: "2.41.0"
     NODE_VER: "18.x"
     DIRENV_VERSION: 'v2.32.3'
+    POSTGRESQL_CLIENT_VER: '15'
   roles:
     - apt-get-upgrade
     - make-autostart-directory
@@ -50,3 +51,6 @@
     - direnv
     - SoundConverter
     - LXD
+    - postgresql-client
+    - mysql-client
+    - DBeaver-CE

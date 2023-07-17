@@ -174,4 +174,16 @@
 |LXD
 |システムコンテナマネージャ
 |-
+
+|postgresql-client
+|postgresql データベースクライアント
+|-
+
+|mysql-client
+|MySQL データベースクライアント
+|-
+
+|DBeaver-CE
+|DB クライアント(Community Edition)
+|-
 |===
