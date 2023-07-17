@@ -1,0 +1,5 @@
+- name: Install redoc-cli
+  become: yes
+  npm:
+    name: "redoc-cli"
+    global: yes

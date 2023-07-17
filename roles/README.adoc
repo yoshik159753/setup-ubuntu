@@ -198,4 +198,16 @@
 |Shotcut
 |動画編集
 |-
+
+|Zoom
+|Web会議サービス
+|-
+
+|tree
+|list contents of directories in a tree-like format.
+|-
+
+|redoc-cli
+|API Reference Documentation
+|Nodejs
 |===
