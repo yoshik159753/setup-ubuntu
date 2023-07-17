@@ -24,3 +24,6 @@
     - git
     - inputrc
     - meld
+    - tmux
+    - renameFolderToEnglish
+    - xpad

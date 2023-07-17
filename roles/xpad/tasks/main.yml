@@ -1,0 +1,11 @@
+- name: Install xpad
+  become: yes
+  apt:
+    name: xpad
+    state: latest
+
+- name: Copy configuration file
+  copy:
+    src: xpad.desktop
+    dest: "{{ GNOME_USER_AUTOSTART_DIRECTORY }}/xpad.desktop"
+  when: GNOME_USER_AUTOSTART_DIRECTORY is defined

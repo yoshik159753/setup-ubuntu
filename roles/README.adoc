@@ -74,4 +74,16 @@
 |meld
 |Diff and merge tool
 |-
+
+|tmux
+|ターミナルマルチプレクサ
+|-
+
+|renameFolderToEnglish
+|日本語のディレクトリ名("ドキュメント"など)を英語に変更
+|-
+
+|xpad
+|付箋紙
+|make-autostart-directory
 |===
