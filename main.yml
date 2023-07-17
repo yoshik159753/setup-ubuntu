@@ -64,3 +64,6 @@
     - steam
     - AWS-Cli
     - Terraform
+    - Asciidoctor
+    - kdenlive
+    - remove-apache2

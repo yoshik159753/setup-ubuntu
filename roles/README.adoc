@@ -223,4 +223,16 @@
 |infrastructure as code software tool
 a| * zip
 * AWS-Cli
+
+|Asciidoctor
+|Documentation generator
+|Ruby
+
+|kdenlive
+|動画編集
+|-
+
+|remove-apache2
+|apache2 をアンインストール
+|-
 |===
