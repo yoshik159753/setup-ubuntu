@@ -1,0 +1,5 @@
+- name: Install
+  become: yes
+  apt: name=asunder state=present
+  notify:
+    - Notification about the cdrom device

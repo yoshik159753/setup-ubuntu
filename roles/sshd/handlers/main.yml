@@ -1,0 +1,3 @@
+- name: Notify setting sshd config
+  debug:
+    msg: "/etc/ssh/sshd_config の設定は手動でお願いします"

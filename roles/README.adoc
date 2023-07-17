@@ -86,4 +86,20 @@
 |xpad
 |付箋紙
 |make-autostart-directory
+
+|JavaDevelopmentKit
+|Java
+|-
+
+|sshd
+|Secure Shell Server
+|-
+
+|MP3EncodingLibrary
+|Install LAME
+|-
+
+|Asunder
+|音楽CDリッピング
+|MP3EncodingLibrary
 |===
