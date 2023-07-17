@@ -1,0 +1,16 @@
+- name: Install
+  become: yes
+  apt:
+    name: gnome-screensaver
+    state: present
+
+- name: Copy script
+  become: yes
+  copy: src=autolock.sh dest={{ USR_LOCAL_BIN }}/autolock.sh mode=0755
+
+- name: Copy configuration file
+  template: src=autolock.sh.desktop.j2 dest={{ GNOME_USER_AUTOSTART_DIRECTORY }}/autolock.sh.desktop
+
+
+# ref: https://askubuntu.com/questions/963675/how-to-start-application-when-system-boots-using-a-desktop-file
+# ref: https://developer-old.gnome.org/desktop-entry-spec/

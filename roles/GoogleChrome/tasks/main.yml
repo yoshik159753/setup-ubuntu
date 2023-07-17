@@ -1,0 +1,16 @@
+- name: Add apt key for GoogleChrome
+  become: yes
+  apt_key: url=https://dl.google.com/linux/linux_signing_key.pub state=present
+- name: Add specified repository into sources list
+  become: yes
+  apt_repository:
+    repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
+    filename: google-chrome
+    state: present
+    update_cache: yes
+- name: Install GoogleChrome
+  become: yes
+  apt: name=google-chrome-stable state=present
+
+# ref. https://www.google.com/linuxrepositories/
+#      http://www.ubuntuupdates.org/ppa/google_chrome

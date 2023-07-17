@@ -1,0 +1,15 @@
+- name: Setup 32bit
+  set_fact:
+    VAGRANT_ARCHITECTURE: i686
+  when: ansible_architecture == "x86"
+
+- name: Setup 64bit
+  set_fact:
+    VAGRANT_ARCHITECTURE: amd64
+  when: ansible_architecture == "x86_64"
+
+- name: Install
+  become: yes
+  apt:
+    deb: "https://releases.hashicorp.com/vagrant/{{ VAGRANT_VER }}/vagrant_{{ VAGRANT_VER }}-1_{{ VAGRANT_ARCHITECTURE }}.deb"
+  notify: Notify download box

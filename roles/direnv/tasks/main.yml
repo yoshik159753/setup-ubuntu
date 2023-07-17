@@ -1,0 +1,16 @@
+- name: Download
+  become: yes
+  get_url:
+    url: "https://github.com/direnv/direnv/releases/download/{{ DIRENV_VERSION }}/direnv.linux-amd64"
+    dest: "{{ USR_LOCAL_BIN }}/direnv"
+    mode: "a+rx"
+    validate_certs: no
+
+- name: Setup
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      eval "$(direnv hook bash)"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DIRENV"
+
+# ref. https://direnv.net/

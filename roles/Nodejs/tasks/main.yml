@@ -1,0 +1,54 @@
+- name: Install NodeJs
+  block:
+    - name: Add the NodeSource package signing key.
+      become: yes
+      apt_key:
+        url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+        state: present
+    - name: Add the desired NodeSource repository.
+      become: yes
+      apt_repository:
+        repo: "deb https://deb.nodesource.com/node_{{ NODE_VER }} {{ ansible_lsb.codename }} main"
+        filename: nodesource
+        state: present
+        update_cache: yes
+    - name: Add the desired NodeSource repository(src).
+      become: yes
+      apt_repository:
+        repo: "deb-src https://deb.nodesource.com/node_{{ NODE_VER }} {{ ansible_lsb.codename }} main"
+        filename: nodesource
+        state: present
+        update_cache: yes
+    - name: Install Node.js
+      become: yes
+      apt:
+        name: nodejs
+        state: present
+        update_cache: yes
+
+# https://github.com/nodesource/distributions#manual-installation
+
+- name: Install Yarn
+  block:
+    - name: Add GPG key
+      become: yes
+      apt_key:
+        url: https://dl.yarnpkg.com/debian/pubkey.gpg
+        state: present
+
+    - name: You will first need to configure the repository
+      become: yes
+      apt_repository:
+        repo: "deb https://dl.yarnpkg.com/debian/ stable main"
+        filename: yarn
+        state: present
+        update_cache: yes
+
+    - name: Install Yarn
+      become: yes
+      apt:
+        name: yarn
+        state: present
+        update_cache: yes
+
+# ref. https://yarnpkg.com/lang/en/docs/install/#debian-stable

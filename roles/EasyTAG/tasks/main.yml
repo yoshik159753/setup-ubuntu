@@ -1,0 +1,3 @@
+- name: Install EasyTAG
+  become: yes
+  apt: name=easytag state=present

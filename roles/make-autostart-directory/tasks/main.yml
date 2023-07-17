@@ -1,0 +1,8 @@
+- name: Make autostart directory
+  file:
+    path: "{{ GNOME_USER_AUTOSTART_DIRECTORY }}"
+    state: directory
+    recurse: yes
+
+# ref: https://askubuntu.com/questions/963675/how-to-start-application-when-system-boots-using-a-desktop-file
+# ref: https://developer-old.gnome.org/desktop-entry-spec/

@@ -1,0 +1,3 @@
+- name: Install
+  become: yes
+  apt: name=lame state=present

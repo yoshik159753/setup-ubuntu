@@ -1,0 +1,8 @@
+- name: Please run manually
+  debug: msg="英語ディレクトリが生成されていなければ LANG=C xdg-user-dirs-update --force を実行してください"
+- name: Please delete the folder you do not need
+  debug: msg="不要なディレクトリは手動で削除してください"
+- name: Reboot
+  debug: msg="実行後は再起動後してください"
+- name: Warning for bookmark
+  debug: msg="bookmarkファイルを配置しました。古いファイルはバックアップしています(~/.config/gtk-3.0/bookmarks)"

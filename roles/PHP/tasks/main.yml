@@ -1,0 +1,34 @@
+- name: Install PHP
+  become: yes
+  apt:
+    name: php
+    state: present
+    update_cache: yes
+
+- name: Install PHP extensions
+  become: yes
+  apt:
+    name:
+      - php-xml
+      - php-sqlite3
+      - php-mysql
+      - php-pgsql
+    state: present
+    update_cache: yes
+
+- name: Install Composer
+  become: yes
+  apt:
+    name: composer
+    state: present
+    update_cache: yes
+
+- name: Install php-cs-fixer
+  become: yes
+  get_url:
+    url: "https://cs.symfony.com/download/php-cs-fixer-v2.phar"
+    dest: "/usr/local/bin/php-cs-fixer"
+    mode: "+x"
+    validate_certs: no
+
+# ref. https://the2g.com/post/visual-studio-code-php-formatter

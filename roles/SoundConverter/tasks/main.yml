@@ -1,0 +1,6 @@
+- name: Install
+  become: yes
+  apt:
+    name: soundconverter
+    state: present
+    update_cache: yes

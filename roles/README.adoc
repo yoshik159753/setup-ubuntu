@@ -1,0 +1,250 @@
+= README
+
+|===
+|ディレクトリ名 |概要 |依存
+
+|apt-get-update
+|パッケージ情報をダウンロード
+|-
+
+|apt-get-update
+|パッケージを更新
+|-
+
+|Audacity
+|オーディオ編集
+|-
+
+|Docker
+|コンテナ型仮想化ソフトウェア
+|-
+
+|Dropbox
+|オンラインストレージサービス
+|-
+
+|EasyTAG
+|音楽ファイルのタグ編集ソフトウェア
+|-
+
+|FFmpeg
+|動画と音声を記録・変換・再生するためのフリーソフトウェア
+|-
+
+|Geeqie
+|Image Viewer
+|-
+
+|Chromium
+|Web Browser
+|-
+
+|VLC
+|Media Player
+|-
+
+|VirtualBox
+|仮想化ソフトウェア
+|-
+
+|Vagrant
+|仮想開発環境構築ソフトウェア
+|VirtualBox
+
+|Vim
+|Text Edior
+|-
+
+|make-autostart-directory
+|GNOME 向けの自動起動用のディレクトリ生成
+|-
+
+|autolock
+|ログイン直後にスクリーンセーバー起動
+|make-autostart-directory
+
+|git
+|Version Control System (config も含む)
+|-
+
+|inputrc
+|bashによる補完時の大文字小文字を無視
+|-
+
+|meld
+|Diff and merge tool
+|-
+
+|tmux
+|ターミナルマルチプレクサ
+|-
+
+|renameFolderToEnglish
+|日本語のディレクトリ名("ドキュメント"など)を英語に変更
+|-
+
+|xpad
+|付箋紙
+|make-autostart-directory
+
+|JavaDevelopmentKit
+|Java
+|-
+
+|sshd
+|Secure Shell Server
+|-
+
+|MP3EncodingLibrary
+|Install LAME
+|-
+
+|Asunder
+|音楽CDリッピング
+|MP3EncodingLibrary
+
+|sshfs
+|filesystem client based on the SSH File Transfer Protocol
+|-
+
+|graphviz
+|Graph Visualization Software
+|-
+
+|plantuml
+|UML Modeling Tool
+|graphviz
+
+|zip
+|Archiver for .zip files
+|-
+
+|Brasero
+|CD/DVD ライティングソフトウェア
+|-
+
+|pandoc
+|マークアップ形式ファイルの Converter
+|-
+
+|VisualStudioCode
+|ソースコードエディタ
+|-
+
+|duplicity
+|Backup software
+|-
+
+|SimpleScreenRecorder
+|スクリーンレコーダー
+|-
+
+|rar
+|データ圧縮ライブラリ
+|-
+
+|Nodejs
+|サーバーサイドJavaScript環境
+|-
+
+|PHP
+|プログラミング言語
+|-
+
+|Ruby
+|プログラミング言語
+|-
+
+|GoogleChrome
+|Web Browser
+|-
+
+|SetPrompt
+|sh のプロンプトを設定
+|-
+
+|direnv
+|Unclutter your .profile
+|-
+
+|SoundConverter
+|オーディオファイルを別形式に変換する GNOME アプリケーション
+|MP3EncodingLibrary
+
+|LXD
+|システムコンテナマネージャ
+|-
+
+|postgresql-client
+|postgresql データベースクライアント
+|-
+
+|mysql-client
+|MySQL データベースクライアント
+|-
+
+|DBeaver-CE
+|DB クライアント(Community Edition)
+|-
+
+|MKVToolNix
+|Matroska ファイル操作ツール
+|-
+
+|GPRename
+|バッチリネーマー
+|-
+
+|Shotcut
+|動画編集
+|-
+
+|Zoom
+|Web会議サービス
+|-
+
+|tree
+|list contents of directories in a tree-like format.
+|-
+
+|redoc-cli
+|API Reference Documentation
+|Nodejs
+
+|steam
+|ゲームプラットホーム
+|-
+
+|AWS-Cli
+|The AWS Command Line Interface
+|-
+
+|Terraform
+|infrastructure as code software tool
+a| * zip
+* AWS-Cli
+
+|Asciidoctor
+|Documentation generator
+|Ruby
+
+|kdenlive
+|動画編集
+|-
+
+|remove-apache2
+|apache2 をアンインストール
+|-
+
+|Rust
+|プログラミング言語
+|-
+
+|OBSStudio
+|ライブストリーミングツール
+|-
+
+|Jump
+|A quick and fuzzy directory jumper
+|-
+|===

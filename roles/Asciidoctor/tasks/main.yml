@@ -1,0 +1,13 @@
+- name: Install asciidoctor-diagram
+  become: yes
+  gem:
+    name: asciidoctor-diagram
+    user_install: no
+    state: present
+
+- name: Install asciidoctor
+  become: yes
+  gem:
+    name: asciidoctor
+    user_install: no
+    state: present

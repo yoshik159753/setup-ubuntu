@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=xpad
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[ja]=xpad
+Name=xpad
+Comment[ja]=
+Comment=

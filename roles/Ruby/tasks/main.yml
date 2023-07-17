@@ -1,0 +1,6 @@
+- name: Install Ruby
+  become: yes
+  apt:
+    name: ruby
+    state: present
+    update_cache: yes

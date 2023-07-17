@@ -1,1 +1,20 @@
 = README
+
+[source,sh]
+.usage
+----
+ansible-playbook -i localhost, --connection local main.yml --ask-become-pass
+----
+
+[source,sh]
+.ansible install
+----
+# ubuntu 23.04 の場合は初期状態でも最新のバージョンがインストールできる模様
+sudo apt-get update && sudo apt-get install -y ansible
+
+# 古いバージョンでは ppa を追加すると良い
+# ref. http://docs.ansible.com/ansible/intro_installation.html
+sudo apt-get update && sudo apt-get install -y software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update && sudo apt-get install -y ansible
+----

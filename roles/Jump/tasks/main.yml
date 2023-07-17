@@ -1,0 +1,6 @@
+---
+- name: Install Jump
+  become: yes
+  apt:
+    deb: "https://github.com/gsamokovarov/jump/releases/download/v{{ JUMP_VER }}/jump_{{ JUMP_VER }}_amd64.deb"
+    state: present

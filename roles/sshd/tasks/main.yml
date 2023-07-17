@@ -1,0 +1,7 @@
+- name: Install
+  become: yes
+  apt:
+    name: openssh-server
+    state: present
+  notify:
+    - Notify setting sshd config

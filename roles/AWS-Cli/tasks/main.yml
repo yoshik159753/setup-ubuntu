@@ -1,0 +1,6 @@
+- name: Install
+  become: yes
+  apt:
+    name: awscli
+    state: present
+    update_cache: yes

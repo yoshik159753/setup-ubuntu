@@ -1,0 +1,29 @@
+- name: Install dependent packages
+  become: yes
+  apt:
+    name: apt-transport-https
+    state: latest
+    update_cache: yes
+
+- name: Add GPG key.
+  become: yes
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+
+- name: Use the following command to set up the stable repository.
+  become: yes
+  apt_repository:
+    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    filename: vscode
+    state: present
+    update_cache: yes
+
+- name: Install
+  become: yes
+  apt:
+    name: code
+    state: latest
+    update_cache: yes
+
+# https://code.visualstudio.com/docs/setup/linux

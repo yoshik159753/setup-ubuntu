@@ -1,0 +1,38 @@
+- name: Download prompt file for git
+  get_url:
+    url: "https://raw.githubusercontent.com/git/git/v{{ GIT_VERSION }}/contrib/completion/git-prompt.sh"
+    dest: "{{ ansible_env.HOME }}/.git-prompt.sh"
+
+- name: bash git prompt support
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      if ! type -t __git_ps1 && [ -e "{{ ansible_env.HOME }}/.git-prompt.sh" ]; then
+        source {{ ansible_env.HOME }}/.git-prompt.sh
+      fi
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GIT-PROMPT.SH"
+
+- name: Set prompt
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      if [ $UID -eq 0 ]; then
+        export PS1='\[\033[1;31m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)" 2>/dev/null) \n# '
+      else
+        export PS1='\[\033[1;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)" 2>/dev/null) \n$ '
+      fi
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR PS1"
+
+# PS1 がすでに記載されていた場合に面倒なので blockinfile で対応
+# - name: Set prompt
+#   lineinfile:
+#     path: "{{ ansible_env.HOME }}/.bashrc"
+#     regexp: 'export PS1='
+#     line: export PS1='\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)" 2>/dev/null) \n$ '
+#     state: present
+#     insertafter: EOF
+#     firstmatch: yes
+#     backup: yes
+
+# PS1 は "The primary prompt string" のことらしい。あと要素とか色の付け方とか。
+# ref. http://pocketstudio.jp/linux/?%A5%D7%A5%ED%A5%F3%A5%D7%A5%C8%A4%CE%B3%CE%C7%A7%A4%E4%C0%DF%C4%EA

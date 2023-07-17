@@ -1,0 +1,4 @@
+- name: Notification about the cdrom device
+  debug: msg="Asunderの設定にあるCD-ROMデバイスに /dev/sr1 を設定します"
+
+# `gvfs-mount -li` で表示される unix-device を指定する必要がある？
