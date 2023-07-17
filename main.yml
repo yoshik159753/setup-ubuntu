@@ -54,3 +54,6 @@
     - postgresql-client
     - mysql-client
     - DBeaver-CE
+    - MKVToolNix
+    - GPRename
+    - Shotcut

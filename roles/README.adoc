@@ -186,4 +186,16 @@
 |DBeaver-CE
 |DB クライアント(Community Edition)
 |-
+
+|MKVToolNix
+|Matroska ファイル操作ツール
+|-
+
+|GPRename
+|バッチリネーマー
+|-
+
+|Shotcut
+|動画編集
+|-
 |===
