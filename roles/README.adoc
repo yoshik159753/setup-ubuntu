@@ -247,4 +247,8 @@ a| * zip
 |Jump
 |A quick and fuzzy directory jumper
 |-
+
+|Python
+|プログラミング言語
+|git
 |===
