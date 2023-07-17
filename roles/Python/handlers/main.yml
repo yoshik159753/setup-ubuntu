@@ -1,0 +1,7 @@
+- name: Restart shell to activate pyenv
+  debug:
+    msg: "shell を再起動することで pyenv が有効化されます"
+
+- name: Restart shell to activate poetry
+  debug:
+    msg: "shell を再起動することで poetry が有効化されます"
