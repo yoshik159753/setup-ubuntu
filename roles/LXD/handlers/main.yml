@@ -1,0 +1,9 @@
+- name: Restart lxd service
+  become: yes
+  service:
+    name: lxd
+    state: restarted
+
+- name: Notify Re-login
+  debug:
+    msg: "再ログインすることでユーザーの lxd グループが有効になります"

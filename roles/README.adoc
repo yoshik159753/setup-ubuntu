@@ -162,4 +162,16 @@
 |SetPrompt
 |sh のプロンプトを設定
 |-
+
+|direnv
+|Unclutter your .profile
+|-
+
+|SoundConverter
+|オーディオファイルを別形式に変換する GNOME アプリケーション
+|MP3EncodingLibrary
+
+|LXD
+|システムコンテナマネージャ
+|-
 |===
