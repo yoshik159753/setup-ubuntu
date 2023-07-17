@@ -1,0 +1,23 @@
+- name: Add ppa for OBS studio
+  become: yes
+  apt_repository:
+    repo: ppa:obsproject/obs-studio
+    state: present
+    update_cache: yes
+
+- name: Install OBS studio
+  become: yes
+  apt:
+    name: obs-studio
+    state: present
+    update_cache: yes
+
+- name: Install ndi plugin for OBS studio
+  become: yes
+  apt:
+    deb: "{{ item }}"
+    state: present
+  loop:
+    - https://github.com/Palakis/obs-ndi/releases/download/4.9.1/libndi4_4.5.1-1_amd64.deb
+    - https://github.com/Palakis/obs-ndi/releases/download/4.9.1/obs-ndi_4.9.1-1_amd64.deb
+  ignore_errors: "{{ ansible_check_mode }}"

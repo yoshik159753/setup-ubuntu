@@ -10,6 +10,7 @@
     DIRENV_VERSION: 'v2.32.3'
     POSTGRESQL_CLIENT_VER: '15'
     TERRAFORM_VER: "1.5.3"
+    JUMP_VER: "0.51.0"
   roles:
     - apt-get-upgrade
     - make-autostart-directory
@@ -67,3 +68,6 @@
     - Asciidoctor
     - kdenlive
     - remove-apache2
+    - OBSStudio
+    - Rust
+    - Jump
