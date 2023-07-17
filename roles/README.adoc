@@ -210,4 +210,17 @@
 |redoc-cli
 |API Reference Documentation
 |Nodejs
+
+|steam
+|ゲームプラットホーム
+|-
+
+|AWS-Cli
+|The AWS Command Line Interface
+|-
+
+|Terraform
+|infrastructure as code software tool
+a| * zip
+* AWS-Cli
 |===

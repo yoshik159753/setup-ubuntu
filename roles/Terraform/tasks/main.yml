@@ -1,0 +1,9 @@
+- name: install
+  become: yes
+  unarchive:
+      src: https://releases.hashicorp.com/terraform/{{ TERRAFORM_VER }}/terraform_{{ TERRAFORM_VER }}_linux_amd64.zip
+      dest: "{{ USR_LOCAL_BIN }}"
+      remote_src: yes
+      owner: root
+      group: root
+      mode: 0755

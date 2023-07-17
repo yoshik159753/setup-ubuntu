@@ -9,6 +9,7 @@
     NODE_VER: "18.x"
     DIRENV_VERSION: 'v2.32.3'
     POSTGRESQL_CLIENT_VER: '15'
+    TERRAFORM_VER: "1.5.3"
   roles:
     - apt-get-upgrade
     - make-autostart-directory
@@ -60,3 +61,6 @@
     - Zoom
     - tree
     - redoc-cli
+    - steam
+    - AWS-Cli
+    - Terraform
