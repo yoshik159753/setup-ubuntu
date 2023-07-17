@@ -34,3 +34,6 @@
     - graphviz
     - plantuml
     - zip
+    - Brasero
+    - pandoc
+    - VisualStudioCode

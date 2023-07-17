@@ -1,0 +1,16 @@
+- name: Install
+  become: yes
+  apt: name=pandoc state=latest
+
+- name: Install dependent packages
+  become: yes
+  apt:
+    name: ['wkhtmltopdf']
+    state: present
+
+# 必要なのか不明な packages
+# - texlive-latex-recommended
+# - texlive-xetex
+# - texlive-luatex
+# - pandoc-citeproc
+# - etoolbox

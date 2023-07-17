@@ -118,4 +118,16 @@
 |zip
 |Archiver for .zip files
 |-
+
+|Brasero
+|CD/DVD ライティングソフトウェア
+|-
+
+|pandoc
+|マークアップ形式ファイルの Converter
+|-
+
+|VisualStudioCode
+|ソースコードエディタ
+|-
 |===
