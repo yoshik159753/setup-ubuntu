@@ -130,4 +130,16 @@
 |VisualStudioCode
 |ソースコードエディタ
 |-
+
+|duplicity
+|Backup software
+|-
+
+|SimpleScreenRecorder
+|スクリーンレコーダー
+|-
+
+|rar
+|データ圧縮ライブラリ
+|-
 |===
