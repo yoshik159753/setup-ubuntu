@@ -42,4 +42,24 @@
 |VLC
 |Media Player
 |-
+
+|VirtualBox
+|仮想化ソフトウェア
+|-
+
+|Vagrant
+|仮想開発環境構築ソフトウェア
+|VirtualBox
+
+|Vim
+|Text Edior
+|-
+
+|make-autostart-directory
+|GNOME 向けの自動起動用のディレクトリ生成
+|-
+
+|autolock
+|ログイン直後にスクリーンセーバー起動
+|make-autostart-directory
 |===

@@ -1,0 +1,153 @@
+let $MYHOME="~/"                        "ホーム
+let $MYVIMROOT=$MYHOME . "~/.vim"       "vimルート
+let $MYVIMRC=$MYHOME . ".vimrc"         "マイ設定ファイル格納先
+let $MYVIMDOC=$MYVIMROOT . "/doc"       "ドキュメント格納先
+
+filetype plugin indent on     "編集するファイルの種類を自動判別し、それに応じた便利な設定やインデントが行われるようにする
+syntax enable                 "編集するファイルの種類に応じて適切なハイライト行う
+
+set number                    "行番号表示
+
+set expandtab                 "タブ入力を複数の空白入力に置き換える
+set tabstop=4                 "画面上でタブ文字が占める幅
+set shiftwidth=4              "自動インデントでずれる幅
+set softtabstop=4             "連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
+set autoindent                "改行時に前の行のインデントを継続する
+set smartindent               "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+
+"マイ設定ファルオープン
+nnoremap <Space>. :<C-u>edit $MYVIMRC
+"マイ設定ファイル読み込み
+nnoremap <Space>s. :<C-u>source $MYVIMRC
+
+"set noignorecase             "検索時に大文字／小文字を区別する
+set ignorecase                "検索時に大文字／小文字を区別しない
+set smartcase                 "大文字を含む場合にのみ大文字／小文字を区別(ignorecaseの場合に有効)
+
+"ヘルプ準備
+nnoremap <C-h> :<C-u>help<Space>
+"カーソル下のキーワードをヘルプで引く
+nnoremap <C-h><C-h> :<C-u>help<Space><C-r><C-w><Enter>
+
+":を押しやすく #なんかいまいち
+"noremap ; :
+"noremap : ;
+
+"日時の入力
+inoremap <expr> ,dd strftime('%Y-%m-%d')
+
+set cursorline                                    "カレントウィンドウのカーソル行をハイライト(初回起動時)
+autocmd WinEnter * setlocal cursorline            "カレントウィンドウのカーソル行をハイライト
+autocmd WinLeave * setlocal nocursorline          "カレントウィンドウから離れたらハイライト解除
+
+"プラグインのドキュメント再読み込み #環境変数だと読み込めない。。
+nnoremap <C-h>tag :<C-u>helptags ~/.vim/doc
+"nnoremap <C-h>tag :<C-u>helptags $MYVIMDOC
+
+"inoremap <expr> = smartchr#loop(' = ',' == ','=')
+
+set nobackup                  "バックアップファイル(~)を作成しない
+"set backup                   "バックアップファイル(~)を作成する
+
+set encoding=utf-8                                "文字エンコーディングを設定
+"set fileencoding=iso-2022-jp,euc-jp,sjis,utf-8   "カレントバッファのファイルの文字エンコーディングを設定
+set fileformats=unix,dos,mac                      "改行 (<EOL>) の種類を指定
+"set guifont=MS_Gothic:h9                         "フォント
+
+"colorscheme desert           "カラースキームを読み込む
+
+"バッファの表示
+nnoremap <Space>wl :<C-u>buffers<Enter>:buf
+"nnoremap <C-w>l :<C-u>buffers<Enter>
+"1個先のバッファに移動
+nnoremap <Space>ww :<C-u>1bNext<Enter>
+"nnoremap <C-w>w :<C-u>1bNext<Enter>
+
+set list listchars=tab:>-     "tab表示(>-)
+set list listchars=trail:-    "行末のスペース表示
+"set list listchars=eol:<     "行末表示(<)
+
+"カーソル下のキーワードを置換対象
+nnoremap <Space>ss :<C-u>%s/<C-r><C-w>/
+
+"Yで行末までヤンク
+nnoremap Y y$
+
+set display=lastline          "長い行を表示
+set pumheight=10              "補完メニューの高さ
+
+"インクリメントとデクリメントのバインディング
+nnoremap + <C-a>
+nnoremap - <C-x>
+
+"開発用画面分割
+nnoremap <Space>dev :<C-u>vsplit<Enter>:<C-u>split<enter>:<C-u>split<enter>
+
+set hlsearch                  "検索時のハイライト
+"set nohls                     "検索時のハイライ解除
+
+set wrap                      "折り返す
+"set nowrap                    "折り返さない
+
+"エクスプローラの表示
+nnoremap <Space>e. :<C-u>e .<Enter>
+
+"--- memo ---
+" vim -R xxx        読み込み専用で開く(!Wで強制保存可能)
+
+"<C-w><C-s>         水平分割
+"<C-w><C-v>         垂直分割
+"<C-w>c             閉じる
+
+"<C-n>              キーワード補完候補選択(前方)
+"<C-p>              キーワード補完候補選択(後方)
+"<C-y>              補完確定
+"<C-e>              補完キャンセル
+"<C-x>              Omni補完
+"<C-o>              Omni補完
+
+"<u>                undo
+"<C-r>              redo
+
+"テキストオブジェクト
+"a: 単語前後の空白を含む
+"i: 単語のみ
+
+"set paste          インデントを保持して貼り付ける
+"                   既存のインデントが効かなくなるため使用後は元に戻すこと！
+"set nopaste        ???
+
+"%s/{pattern}/{string}/[flag]
+"        flag : g : 行中の全てのマッチを置換する
+"               i : パターンの大文字/小文字を区別しない
+"               I : パターンの大文字/小文字を区別する
+"               c : 置換前に毎回確認する
+
+"v/{文字列}/d       ファイル全体から文字列が含まれていない行を削除
+"g/{文字列}/d       ファイル全体から文字列が含まれている行を削除
+
+" レジスタ
+" :reg              レジスタの中身を確認
+" "{char}yy         レジスタ{char}にヤンク
+" "{char}p          レジスタ{char}の中身を貼り付け
+" yyでヤンクしたものはレジスタ0に蓄えられる。
+" ddで削除したものはレジスタ1に蓄えられる。                                     
+" レジスタ{0-9}については貼り付け時に"いらないっぽい。
+
+"                          gg
+"                          ?text(#)
+"                          <C-b>
+"                          <C-u>
+"                          H
+"                          {
+"                          <C-y>
+"                          k
+"0 ^ Fx(,) Tx b(B) ge(gE) h l e(E) w(W) tx fx(;) $
+"                          j
+"                          <C-e>
+"                          }
+"                          L
+"                          <C-d>
+"                          <C-f>
+"                          /test(*)
+"                          G

@@ -1,0 +1,2 @@
+- name: Notify download box
+  debug: msg="boxのdownloadは vagrant box add (ubuntu/trusty32 | centos/7) --provider virtualbox で行います"
