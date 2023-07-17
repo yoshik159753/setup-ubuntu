@@ -1,0 +1,2 @@
+- name: Warning for inputrc
+  debug: msg="inputrcの設定ファイルを配置しました。古いファイルはバックアップしています"

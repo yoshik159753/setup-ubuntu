@@ -62,4 +62,16 @@
 |autolock
 |ログイン直後にスクリーンセーバー起動
 |make-autostart-directory
+
+|git
+|Version Control System
+|-
+
+|inputrc
+|bashによる補完時の大文字小文字を無視
+|-
+
+|meld
+|Diff and merge tool
+|-
 |===
