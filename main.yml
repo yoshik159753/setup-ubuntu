@@ -30,3 +30,7 @@
     - JavaDevelopmentKit
     - sshd
     - Asunder
+    - sshfs
+    - graphviz
+    - plantuml
+    - zip

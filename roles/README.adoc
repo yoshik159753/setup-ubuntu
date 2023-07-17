@@ -102,4 +102,20 @@
 |Asunder
 |音楽CDリッピング
 |MP3EncodingLibrary
+
+|sshfs
+|filesystem client based on the SSH File Transfer Protocol
+|-
+
+|graphviz
+|Graph Visualization Software
+|-
+
+|plantuml
+|UML Modeling Tool
+|graphviz
+
+|zip
+|Archiver for .zip files
+|-
 |===
