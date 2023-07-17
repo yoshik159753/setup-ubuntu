@@ -64,7 +64,7 @@
 |make-autostart-directory
 
 |git
-|Version Control System
+|Version Control System (config も含む)
 |-
 
 |inputrc

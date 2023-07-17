@@ -59,3 +59,28 @@
 # ref. アップグレードの抑止に関するメモ
 #      https://github.com/ansible/ansible/issues/18889
 #      https://manpages.debian.org/jessie/dpkg/dpkg.1.ja.html
+
+- name: Set git config
+  git_config:
+    name: "{{ item.name }}"
+    scope: global
+    value: "{{ item.value }}"
+  with_items:
+    - { name: 'alias.branches', value: 'branch -a'}
+    - { name: 'alias.co', value: 'checkout'}
+    - { name: 'alias.ci', value: 'commit -v'}
+    - { name: 'alias.df', value: 'diff'}
+    - { name: 'alias.dfcached', value: 'diff --cached'}
+    - { name: 'alias.dfhead', value: 'diff HEAD'}
+    - { name: 'alias.lg', value: 'log --graph --pretty=oneline --abbrev-commit --decorate=full'}
+    - { name: 'alias.lgg', value: 'log --graph --pretty=short --abbrev-commit --decorate=full'}
+    - { name: 'alias.lggg', value: 'log --graph --pretty=fuller --decorate=full'}
+    - { name: 'alias.remotes', value: 'remote -v'}
+    - { name: 'alias.s', value: 'status'}
+    - { name: 'alias.stashes', value: 'stash list'}
+    - { name: 'alias.dfls', value: 'diff --stat --name-only'}
+    - { name: 'color.ui', value: 'true'}
+    - { name: 'core.editor', value: 'vim'}
+    - { name: 'core.pager', value: 'less -S -x4'}
+    - { name: 'core.quotepath', value: 'false'}
+    - { name: 'fetch.prune', value: 'true'}
