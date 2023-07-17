@@ -150,4 +150,16 @@
 |PHP
 |プログラミング言語
 |-
+
+|Ruby
+|プログラミング言語
+|-
+
+|GoogleChrome
+|Web Browser
+|-
+
+|SetPrompt
+|sh のプロンプトを設定
+|-
 |===
