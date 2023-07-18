@@ -149,7 +149,7 @@ a|Version Control System
 |-
 
 |Nodejs
-|サーバーサイドJavaScript環境
+|サーバーサイド JavaScript 環境
 |-
 
 |PHP
