@@ -1,0 +1,6 @@
+- name: Install Peek
+  become: true
+  apt:
+    name: peek
+    state: latest
+    update_cache: yes
