@@ -64,7 +64,12 @@
 |make-autostart-directory
 
 |git
-|Version Control System (config も含む)
+a|Version Control System
+
+* git
+* git-svn
+* gitk
+* git config
 |-
 
 |inputrc
