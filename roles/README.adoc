@@ -258,6 +258,11 @@ a| * zip
 |-
 
 |Python
-|プログラミング言語
+a|プログラミング言語
+
+* Python3
+* virtualenv
+* pyenv
+* poetry
 |git
 |===
