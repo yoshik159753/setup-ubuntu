@@ -64,11 +64,16 @@
 |make-autostart-directory
 
 |git
-|Version Control System (config も含む)
+a|Version Control System
+
+* git
+* git-svn
+* gitk
+* git config
 |-
 
 |inputrc
-|bashによる補完時の大文字小文字を無視
+|bash による補完時の大文字小文字を無視
 |-
 
 |meld
@@ -144,11 +149,15 @@
 |-
 
 |Nodejs
-|サーバーサイドJavaScript環境
+|サーバーサイド JavaScript 環境
 |-
 
 |PHP
-|プログラミング言語
+a|プログラミング言語
+
+* PHP
+* Composer
+* php-cs-fixer
 |-
 
 |Ruby
@@ -249,6 +258,11 @@ a| * zip
 |-
 
 |Python
-|プログラミング言語
+a|プログラミング言語
+
+* Python3
+* virtualenv
+* pyenv
+* poetry
 |git
 |===
