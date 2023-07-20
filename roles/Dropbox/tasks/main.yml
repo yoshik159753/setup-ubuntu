@@ -1,16 +1,21 @@
-- name: Setup 32bit
-  set_fact:
-    DROPBOX_ARCHITECTURE: i386
-  when: "ansible_architecture == 'x86'"
+- name: Add apt key
+  become: true
+  ansible.builtin.get_url:
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x1c61a2656fb57b7e4de0f4c1fc918b335044912e
+    dest: "{{ KEYRINGS_PATH }}/dropbox.asc"
 
-- name: Setup 64bit
-  set_fact:
-    DROPBOX_ARCHITECTURE: amd64
-  when: "ansible_architecture == 'x86_64'"
+- name: Add specified repository into sources list
+  become: true
+  apt_repository:
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/dropbox.asc] https://linux.dropbox.com/ubuntu {{ ansible_lsb.codename }} main"
+    filename: dropbox
+    state: present
+    update_cache: yes
 
-- name: Install
-  become: yes
+- name: Install dropbox
+  become: true
   apt:
-    deb: "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_{{ DROPBOX_ARCHITECTURE }}.deb"
+    name: dropbox
+    state: present
   notify:
     - Notification about installation
