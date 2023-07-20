@@ -1,7 +1,21 @@
-- name: For Ubuntu, this PPA provides the latest stable upstream Git version
-  become: yes
+- name: Add apt key
+  become: true
+  ansible.builtin.get_url:
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xe1dd270288b4e6030699e45fa1715d88e1df1f24
+    dest: "{{ KEYRINGS_PATH }}/git.asc"
+
+- name: Add specified repository into sources list
+  become: true
   apt_repository:
-    repo: 'ppa:git-core/ppa'
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_lsb.codename }} main"
+    filename: git
+    state: present
+    update_cache: yes
+
+- name: Add specified repository into sources list (src)
+  become: true
+  apt_repository:
+    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_lsb.codename }} main"
     filename: git
     state: present
     update_cache: yes
