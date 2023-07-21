@@ -149,7 +149,10 @@ a|Version Control System
 |-
 
 |Nodejs
-|サーバーサイド JavaScript 環境
+a|サーバーサイド JavaScript 環境
+
+* NodeJs
+* Yarn
 |-
 
 |PHP

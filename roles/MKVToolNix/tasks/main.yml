@@ -1,22 +1,22 @@
 - name: Add apt key
-  become: yes
-  apt_key:
+  become: true
+  ansible.builtin.get_url:
     url: https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt
-    state: present
+    dest: "{{ KEYRINGS_PATH }}/mkvtoolnix.asc"
 
 - name: Add specified repository into sources list
-  become: yes
+  become: true
   apt_repository:
-    repo: 'deb https://mkvtoolnix.download/ubuntu/ {{ ansible_distribution_release }} main'
-    filename: mkvtoolnix.download.list
+    repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_distribution_release }} main'
+    filename: mkvtoolnix.download
     state: present
     update_cache: yes
 
 - name: Add specified repository into sources list
-  become: yes
+  become: true
   apt_repository:
-    repo: 'deb-src https://mkvtoolnix.download/ubuntu/ {{ ansible_distribution_release }} main'
-    filename: mkvtoolnix.download.list
+    repo: 'deb-src [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_distribution_release }} main'
+    filename: mkvtoolnix.download
     state: present
     update_cache: yes
 

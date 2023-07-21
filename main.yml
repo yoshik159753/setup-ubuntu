@@ -2,6 +2,7 @@
     - localhost
   vars:
     USR_LOCAL_BIN: "/usr/local/bin"
+    KEYRINGS_PATH: "/etc/apt/keyrings"
     GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_env.HOME }}/.config/autostart"
     DOCKER_COMPOSE_VER: v2.20.0
     VAGRANT_VER: 2.3.7

@@ -1,7 +1,22 @@
-- name: Add ppa for OBS studio
-  become: yes
+- name: Add apt key
+  become: true
+  ansible.builtin.get_url:
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xbc7345f522079769f5bbe987efc71127f425e228
+    dest: "{{ KEYRINGS_PATH }}/obsproject.asc"
+
+- name: Add specified repository into sources list
+  become: true
   apt_repository:
-    repo: ppa:obsproject/obs-studio
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/obsproject.asc] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_lsb.codename }} main"
+    filename: obsproject
+    state: present
+    update_cache: yes
+
+- name: Add specified repository into sources list (src)
+  become: true
+  apt_repository:
+    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/obsproject.asc] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_lsb.codename }} main"
+    filename: obsproject
     state: present
     update_cache: yes
 

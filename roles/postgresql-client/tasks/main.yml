@@ -1,13 +1,13 @@
 - name: Add apt key for PostgreSQL
-  become: yes
-  apt_key:
+  become: true
+  ansible.builtin.get_url:
     url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
-    state: present
+    dest: "{{ KEYRINGS_PATH }}/postgresql.asc"
 
 - name: Add specified repository into sources list
-  become: yes
+  become: true
   apt_repository:
-    repo: 'deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main'
+    repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/postgresql.asc] http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main'
     filename: pgdg
     state: present
     update_cache: yes
