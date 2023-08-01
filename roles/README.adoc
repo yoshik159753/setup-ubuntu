@@ -272,4 +272,8 @@ a|プログラミング言語
 |Peek
 |animated GIF recorder
 |-
+
+|Edge-beta
+|Web Browser. (beta ver)
+|-
 |===
