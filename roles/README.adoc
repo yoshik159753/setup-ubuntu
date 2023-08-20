@@ -276,4 +276,8 @@ a|プログラミング言語
 |Edge-beta
 |Web Browser. (beta ver)
 |-
+
+|FileZilla
+|機能豊富なグラフィカル FTP/FTPS/SFTP クライアント
+|-
 |===

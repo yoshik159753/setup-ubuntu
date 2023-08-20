@@ -1,0 +1,5 @@
+- name: Install
+  become: true
+  apt:
+    name: filezilla
+    state: present
