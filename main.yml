@@ -6,7 +6,7 @@
     GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_env.HOME }}/.config/autostart"
     DOCKER_COMPOSE_VER: v2.20.0
     VAGRANT_VER: 2.3.7
-    GIT_VERSION: "2.41.0"
+    GIT_VERSION: "2.46.0"
     NODE_VER: "20.x"
     DIRENV_VERSION: 'v2.32.3'
     POSTGRESQL_CLIENT_VER: '15'
