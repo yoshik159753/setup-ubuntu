@@ -3,19 +3,19 @@
     - name: Add the NodeSource package signing key.
       become: true
       ansible.builtin.get_url:
-        url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+        url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
         dest: "{{ KEYRINGS_PATH }}/nodesource.asc"
     - name: Add the desired NodeSource repository.
       become: yes
       apt_repository:
-        repo: "deb [signed-by={{ KEYRINGS_PATH }}/nodesource.asc] https://deb.nodesource.com/node_{{ NODE_VER }} {{ ansible_lsb.codename }} main"
+        repo: "deb [signed-by={{ KEYRINGS_PATH }}/nodesource.asc] https://deb.nodesource.com/node_{{ NODE_VER }} nodistro main"
         filename: nodesource
         state: present
         update_cache: yes
     - name: Add the desired NodeSource repository(src).
       become: yes
       apt_repository:
-        repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/nodesource.asc] https://deb.nodesource.com/node_{{ NODE_VER }} {{ ansible_lsb.codename }} main"
+        repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/nodesource.asc] https://deb.nodesource.com/node_{{ NODE_VER }} nodistro main"
         filename: nodesource
         state: present
         update_cache: yes
