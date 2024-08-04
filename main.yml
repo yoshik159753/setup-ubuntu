@@ -6,8 +6,8 @@
     GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_env.HOME }}/.config/autostart"
     DOCKER_COMPOSE_VER: v2.20.0
     VAGRANT_VER: 2.3.7
-    GIT_VERSION: "2.41.0"
-    NODE_VER: "18.x"
+    GIT_VERSION: "2.46.0"
+    NODE_VER: "20.x"
     DIRENV_VERSION: 'v2.32.3'
     POSTGRESQL_CLIENT_VER: '15'
     TERRAFORM_VER: "1.5.3"
@@ -21,7 +21,6 @@
     - EasyTAG
     - FFmpeg
     - Geeqie
-    - Chromium
     - VLC
     - VirtualBox
     - Vagrant
@@ -36,7 +35,6 @@
     - JavaDevelopmentKit
     - sshd
     - Asunder
-    - sshfs
     - graphviz
     - plantuml
     - zip
@@ -59,20 +57,11 @@
     - DBeaver-CE
     - MKVToolNix
     - GPRename
-    - Shotcut
-    - Zoom
     - tree
     - redoc-cli
-    - steam
-    - AWS-Cli
-    - Terraform
     - Asciidoctor
-    - kdenlive
     - remove-apache2
-    - OBSStudio
     - Rust
-    - Jump
     - Python
     - Peek
-    - Edge-beta
     - FileZilla

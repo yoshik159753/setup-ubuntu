@@ -6,7 +6,7 @@
     update_cache: yes
 
 # 環境分離ツール(Python用)
-- name: Install
+- name: Install virtualenv
   become: yes
   apt:
     name: virtualenv
@@ -43,29 +43,10 @@
     # ref. https://github.com/pyenv/pyenv#installation
     # ref. https://github.com/pyenv/pyenv/wiki
 
-
 - name: Install poetry
-  block:
-    - name: Fetch poetry
-      uri:
-        url: https://install.python-poetry.org
-        return_content: yes
-      register: poetry_installer
+  become: yes
+  apt:
+    name: "python3-poetry"
+    state: present
+    update_cache: yes
 
-    - name: Run poetry installer
-      shell:
-        cmd: python3 --
-        stdin: "{{ poetry_installer.content }}"
-
-    - name: Define environment variable
-      blockinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        block: |
-          export PATH="$HOME/.local/bin:$PATH"
-        marker: "# {mark} ANSIBLE MANAGED BLOCK FOR LOCAL_BIN_PATH"
-      notify:
-        - Restart shell to activate poetry
-
-      # TODO : べき等性が保てていないのでどうにかしたい。
-
-      # ref. https://ymotongpoo.hatenablog.com/entry/2021/03/01/224610
