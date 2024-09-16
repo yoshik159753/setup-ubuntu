@@ -93,8 +93,10 @@
     - { name: 'alias.s', value: 'status'}
     - { name: 'alias.stashes', value: 'stash list'}
     - { name: 'alias.dfls', value: 'diff --stat --name-only'}
+    - { name: 'alias.sw', value: 'switch'}
     - { name: 'color.ui', value: 'true'}
     - { name: 'core.editor', value: 'vim'}
     - { name: 'core.pager', value: 'less -S -x4'}
     - { name: 'core.quotepath', value: 'false'}
     - { name: 'fetch.prune', value: 'true'}
+    - { name: 'core.commentchar', value: ';'}
