@@ -7,7 +7,7 @@
   blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
-      if ! type -t __git_ps1 && [ -e "{{ ansible_env.HOME }}/.git-prompt.sh" ]; then
+      if ! type -t __git_ps1 1>/dev/null && [ -e "{{ ansible_env.HOME }}/.git-prompt.sh" ]; then
         source {{ ansible_env.HOME }}/.git-prompt.sh
       fi
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GIT-PROMPT.SH"
