@@ -21,3 +21,23 @@ sudo apt-get update && sudo apt-get install -y software-properties-common
 sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get update && sudo apt-get install -y ansible
 ----
+
+== virtualbox で検証環境準備
+
+* virtualbox で環境作成
+** メモリは 4GB 以上を推奨
+* `sudo apt update && sudo apt upgrade`
+* guest additions インストール
+** `sudo apt install gcc make`
+** guest additions を公式サイトからダウンロード
+** 電源オフして DL した guest additions を挿入
+** 起動してメディアの autorun.sh を実行(右クリックしてプログラムとして実行、とか)
+*** 必要に応じて bzip2 とかインストール
+* クリップボード共有
+** 起動前に「設定 > 一般 > 高度」から「双方向」で有効化
+* フォルダ共有
+** 起動前に「設定 > 共有フォルダ > 共有フォルダの設定」で共有フォルダ追加
+*** 「自動マウント」にチェック
+*** フォルダ名は「host」、マウントポイントは「/media/host」とかにしておくと良さげ
+** VirtualBox 側の対象ユーザーに「vboxsf」のグループを付与して再ログイン
+*** `sudo gpasswd --add {ユーザ名} vboxsf`
