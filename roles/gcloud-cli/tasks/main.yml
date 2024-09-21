@@ -1,0 +1,32 @@
+- name: Install required packages
+  become: true
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg
+      - curl
+    state: present
+    update_cache: yes
+
+- name: Add Google Cloud public key
+  become: true
+  ansible.builtin.get_url:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    dest: "{{ KEYRINGS_PATH }}/gcloud.asc"
+
+- name: Add Google Cloud repository
+  become: true
+  apt_repository:
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/gcloud.asc] https://packages.cloud.google.com/apt cloud-sdk main"
+    state: present
+    filename: google-cloud-sdk
+    update_cache: yes
+
+- name: Install Google Cloud CLI
+  become: true
+  apt:
+    name: google-cloud-cli
+    state: present
+
+# ref. https://cloud.google.com/sdk/docs/install?hl=ja#deb
