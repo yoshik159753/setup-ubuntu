@@ -284,4 +284,8 @@ a|プログラミング言語
 |gcloud CLI
 |Google Cloud でホストされるリソースやアプリケーションの管理に使用できる一連のツール
 |-
+
+|claude-code
+|Anthropic の Claude Code CLI ツール
+|-
 |===
