@@ -15,7 +15,8 @@
 - name: Install postgresql-client
   become: yes
   apt:
-    name: postgresql-client-{{ POSTGRESQL_CLIENT_VER }}
-    state: present
+    name: postgresql-client
+    state: latest
+    update_cache: yes
 
 # ref. https://www.postgresql.org/download/linux/ubuntu/
