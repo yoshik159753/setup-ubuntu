@@ -5,7 +5,6 @@
     KEYRINGS_PATH: "/etc/apt/keyrings"
     GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_env.HOME }}/.config/autostart"
   roles:
-    - make-autostart-directory
     - Audacity
     - Docker
     - Dropbox
