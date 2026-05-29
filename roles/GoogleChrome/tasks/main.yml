@@ -6,15 +6,17 @@
 
 - name: Add specified repository into sources list
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/google.asc] https://dl.google.com/linux/chrome/deb/ stable main'
     filename: google-chrome
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install GoogleChrome
-  become: yes
-  apt: name=google-chrome-stable state=present
+  become: true
+  ansible.builtin.apt:
+    name: google-chrome-stable
+    state: present
 
 # ref. https://www.google.com/linuxrepositories/
 #      http://www.ubuntuupdates.org/ppa/google_chrome

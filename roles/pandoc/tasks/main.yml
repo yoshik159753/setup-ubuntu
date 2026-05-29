@@ -1,16 +1,15 @@
-- name: Install
-  become: yes
-  apt: name=pandoc state=latest
+- name: Install pandoc
+  become: true
+  ansible.builtin.apt:
+    name: pandoc
+    state: latest
 
-- name: Install dependent packages
-  become: yes
-  apt:
-    name: ['wkhtmltopdf']
+- name: Install PDF conversion packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - texlive-xetex
+      - texlive-latex-recommended
+      - texlive-lang-japanese
+      - fonts-noto-cjk
     state: present
-
-# 必要なのか不明な packages
-# - texlive-latex-recommended
-# - texlive-xetex
-# - texlive-luatex
-# - pandoc-citeproc
-# - etoolbox

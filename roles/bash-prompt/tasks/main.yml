@@ -1,19 +1,14 @@
-- name: Download prompt file for git
-  get_url:
-    url: "https://raw.githubusercontent.com/git/git/v{{ GIT_VERSION }}/contrib/completion/git-prompt.sh"
-    dest: "{{ ansible_env.HOME }}/.git-prompt.sh"
-
 - name: bash git prompt support
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
-      if ! type -t __git_ps1 1>/dev/null && [ -e "{{ ansible_env.HOME }}/.git-prompt.sh" ]; then
-        source {{ ansible_env.HOME }}/.git-prompt.sh
+      if ! type -t __git_ps1 1>/dev/null && [ -f /usr/lib/git-core/git-sh-prompt ]; then
+        source /usr/lib/git-core/git-sh-prompt
       fi
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GIT-PROMPT.SH"
 
 - name: Set prompt
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
       if [ $UID -eq 0 ]; then

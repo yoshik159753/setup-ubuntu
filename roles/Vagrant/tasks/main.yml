@@ -1,15 +1,22 @@
-- name: Setup 32bit
-  set_fact:
-    VAGRANT_ARCHITECTURE: i686
-  when: ansible_architecture == "x86"
+- name: Add HashiCorp GPG key
+  become: true
+  ansible.builtin.get_url:
+    url: https://apt.releases.hashicorp.com/gpg
+    dest: "{{ KEYRINGS_PATH }}/hashicorp.asc"
 
-- name: Setup 64bit
-  set_fact:
-    VAGRANT_ARCHITECTURE: amd64
-  when: ansible_architecture == "x86_64"
+- name: Add HashiCorp repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/hashicorp.asc] https://apt.releases.hashicorp.com {{ ansible_lsb.codename }} main"
+    filename: hashicorp
+    state: present
+    update_cache: true
 
-- name: Install
-  become: yes
-  apt:
-    deb: "https://releases.hashicorp.com/vagrant/{{ VAGRANT_VER }}/vagrant_{{ VAGRANT_VER }}-1_{{ VAGRANT_ARCHITECTURE }}.deb"
+- name: Install Vagrant
+  become: true
+  ansible.builtin.apt:
+    name: vagrant
+    state: latest
   notify: Notify download box
+
+# ref. https://developer.hashicorp.com/vagrant/install

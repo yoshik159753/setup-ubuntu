@@ -1,30 +1,43 @@
 - name: Install NodeJs
   block:
-    - name: Add the NodeSource package signing key.
+    - name: Get Node.js release index
+      ansible.builtin.uri:
+        url: https://nodejs.org/dist/index.json
+        return_content: true
+      register: nodejs_index
+
+    - name: Determine latest LTS major version
+      ansible.builtin.set_fact:
+        node_lts_major: "{{ (nodejs_index.json | selectattr('lts') | first).version | regex_replace('^v(\\d+)\\..*', '\\1') }}"
+
+    - name: Add the NodeSource package signing key
       become: true
       ansible.builtin.get_url:
         url: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
         dest: "{{ KEYRINGS_PATH }}/nodesource.asc"
-    - name: Add the desired NodeSource repository.
-      become: yes
-      apt_repository:
-        repo: "deb [signed-by={{ KEYRINGS_PATH }}/nodesource.asc] https://deb.nodesource.com/node_{{ NODE_VER }} nodistro main"
+
+    - name: Add the desired NodeSource repository
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by={{ KEYRINGS_PATH }}/nodesource.asc] https://deb.nodesource.com/node_{{ node_lts_major }}.x nodistro main"
         filename: nodesource
         state: present
-        update_cache: yes
-    - name: Add the desired NodeSource repository(src).
-      become: yes
-      apt_repository:
-        repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/nodesource.asc] https://deb.nodesource.com/node_{{ NODE_VER }} nodistro main"
+        update_cache: true
+
+    - name: Add the desired NodeSource repository (src)
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/nodesource.asc] https://deb.nodesource.com/node_{{ node_lts_major }}.x nodistro main"
         filename: nodesource
         state: present
-        update_cache: yes
+        update_cache: true
+
     - name: Install Node.js
-      become: yes
-      apt:
+      become: true
+      ansible.builtin.apt:
         name: nodejs
-        state: present
-        update_cache: yes
+        state: latest
+        update_cache: true
 
 # https://github.com/nodesource/distributions#manual-installation
 
@@ -36,19 +49,19 @@
         url: https://dl.yarnpkg.com/debian/pubkey.gpg
         dest: "{{ KEYRINGS_PATH }}/yarnpkg.asc"
 
-    - name: You will first need to configure the repository
-      become: yes
-      apt_repository:
+    - name: Configure the repository
+      become: true
+      ansible.builtin.apt_repository:
         repo: "deb [signed-by={{ KEYRINGS_PATH }}/yarnpkg.asc] https://dl.yarnpkg.com/debian/ stable main"
         filename: yarn
         state: present
-        update_cache: yes
+        update_cache: true
 
     - name: Install Yarn
-      become: yes
-      apt:
+      become: true
+      ansible.builtin.apt:
         name: yarn
-        state: present
-        update_cache: yes
+        state: latest
+        update_cache: true
 
 # ref. https://yarnpkg.com/lang/en/docs/install/#debian-stable

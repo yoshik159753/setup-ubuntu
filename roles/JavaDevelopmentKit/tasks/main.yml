@@ -1,3 +1,5 @@
-- name: Install
-  become: yes
-  apt: name=default-jdk state=present
+- name: Install default-jdk
+  become: true
+  ansible.builtin.apt:
+    name: default-jdk
+    state: present

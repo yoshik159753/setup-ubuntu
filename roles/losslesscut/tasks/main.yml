@@ -1,6 +1,5 @@
-- name: Install shotcut
+- name: Install losslesscut
   become: true
   community.general.snap:
-    name: shotcut
-    classic: true
+    name: losslesscut
     state: present

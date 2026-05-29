@@ -1,5 +1,5 @@
-- name: Install
-  become: yes
-  apt:
+- name: Install chromium-browser
+  become: true
+  ansible.builtin.apt:
     name: chromium-browser
     state: latest

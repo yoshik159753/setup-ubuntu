@@ -1,0 +1,21 @@
+- name: Add Claude Code GPG key
+  become: true
+  ansible.builtin.get_url:
+    url: https://downloads.claude.ai/keys/claude-code.asc
+    dest: "{{ KEYRINGS_PATH }}/claude-code.asc"
+
+- name: Add Claude Code repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/claude-code.asc] https://downloads.claude.ai/claude-code/apt/stable stable main"
+    filename: claude-code
+    state: present
+    update_cache: true
+
+- name: Install Claude Code
+  become: true
+  ansible.builtin.apt:
+    name: claude-code
+    state: latest
+
+# ref. https://code.claude.com/docs/en/setup#install-with-linux-package-managers

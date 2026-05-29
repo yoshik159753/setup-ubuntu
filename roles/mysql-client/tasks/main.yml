@@ -1,6 +1,6 @@
 - name: Install mysql-client
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     name: mysql-client
     state: present
-    update_cache: yes
+    update_cache: true

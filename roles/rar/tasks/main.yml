@@ -1,5 +1,7 @@
-- name: Install
-  become: yes
-  apt:
-    name: ['rar', 'unrar']
+- name: Install rar and unrar
+  become: true
+  ansible.builtin.apt:
+    name:
+      - rar
+      - unrar
     state: present

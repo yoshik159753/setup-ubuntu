@@ -1,2 +1,3 @@
 - name: Warning for vim
-  debug: msg="Vimの設定ファイルを配置しました。古いファイルはバックアップしています"
+  ansible.builtin.debug:
+    msg: "Vimの設定ファイルを配置しました。古いファイルはバックアップしています"

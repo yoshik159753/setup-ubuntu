@@ -1,9 +1,21 @@
-- name: install
-  become: yes
-  unarchive:
-      src: https://releases.hashicorp.com/terraform/{{ TERRAFORM_VER }}/terraform_{{ TERRAFORM_VER }}_linux_amd64.zip
-      dest: "{{ USR_LOCAL_BIN }}"
-      remote_src: yes
-      owner: root
-      group: root
-      mode: 0755
+- name: Add HashiCorp GPG key
+  become: true
+  ansible.builtin.get_url:
+    url: https://apt.releases.hashicorp.com/gpg
+    dest: "{{ KEYRINGS_PATH }}/hashicorp.asc"
+
+- name: Add HashiCorp repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/hashicorp.asc] https://apt.releases.hashicorp.com {{ ansible_lsb.codename }} main"
+    filename: hashicorp
+    state: present
+    update_cache: true
+
+- name: Install Terraform
+  become: true
+  ansible.builtin.apt:
+    name: terraform
+    state: latest
+
+# ref. https://developer.hashicorp.com/terraform/install

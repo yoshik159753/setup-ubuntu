@@ -6,25 +6,27 @@
 
 - name: Add specified repository into sources list
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_distribution_release }} main'
     filename: mkvtoolnix.download
     state: present
-    update_cache: yes
+    update_cache: true
 
-- name: Add specified repository into sources list
+- name: Add specified repository into sources list (src)
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb-src [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_distribution_release }} main'
     filename: mkvtoolnix.download
     state: present
-    update_cache: yes
+    update_cache: true
 
-- name: Install
-  become: yes
-  apt:
-    name: ['mkvtoolnix', 'mkvtoolnix-gui']
+- name: Install MKVToolNix
+  become: true
+  ansible.builtin.apt:
+    name:
+      - mkvtoolnix
+      - mkvtoolnix-gui
     state: present
-    update_cache: yes
+    update_cache: true
 
 # ref. https://mkvtoolnix.download/index.html

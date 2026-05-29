@@ -6,30 +6,30 @@
 
 - name: Add specified repository into sources list
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [signed-by={{ KEYRINGS_PATH }}/obsproject.asc] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_lsb.codename }} main"
     filename: obsproject
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Add specified repository into sources list (src)
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/obsproject.asc] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_lsb.codename }} main"
     filename: obsproject
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install OBS studio
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     name: obs-studio
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install ndi plugin for OBS studio
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     deb: "{{ item }}"
     state: present
   loop:

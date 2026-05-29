@@ -1,6 +1,6 @@
-- name: Install
-  become: yes
-  apt:
+- name: Install steam
+  become: true
+  ansible.builtin.apt:
     name: steam
     state: present
-    update_cache: yes
+    update_cache: true

@@ -1,6 +1,6 @@
-- name: Install
-  become: yes
-  apt:
+- name: Install awscli
+  become: true
+  ansible.builtin.apt:
     name: awscli
     state: present
-    update_cache: yes
+    update_cache: true

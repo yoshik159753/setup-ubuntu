@@ -1,4 +1,5 @@
-- name: Copy inputrc
-  copy: src=inputrc dest={{ ansible_env.HOME }}/.inputrc backup=yes
-  notify:
-    - Warning for inputrc
+- name: Configure inputrc to ignore case in completion
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.inputrc"
+    create: true
+    line: "set completion-ignore-case on"

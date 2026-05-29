@@ -4,17 +4,7 @@
     USR_LOCAL_BIN: "/usr/local/bin"
     KEYRINGS_PATH: "/etc/apt/keyrings"
     GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_env.HOME }}/.config/autostart"
-    DOCKER_COMPOSE_VER: v2.20.0
-    VAGRANT_VER: 2.3.7
-    GIT_VERSION: "2.46.0"
-    NODE_VER: "20.x"
-    DIRENV_VERSION: 'v2.32.3'
-    POSTGRESQL_CLIENT_VER: '15'
-    TERRAFORM_VER: "1.5.3"
-    JUMP_VER: "0.51.0"
   roles:
-    - apt-get-upgrade
-    - make-autostart-directory
     - Audacity
     - Docker
     - Dropbox
@@ -48,7 +38,7 @@
     - PHP
     - Ruby
     - GoogleChrome
-    - SetPrompt
+    - bash-prompt
     - direnv
     - SoundConverter
     - LXD
@@ -66,3 +56,5 @@
     - Peek
     - FileZilla
     - gcloud-cli
+    - claude-code
+    - losslesscut

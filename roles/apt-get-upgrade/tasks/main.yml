@@ -1,5 +1,0 @@
-- name: Warning
-  debug: msg="upgradeは時間がかかります.1時間以上処理している場合は異常状態かもしれません"
-- name: apt-get upgrade
-  become: yes
-  apt: upgrade=dist

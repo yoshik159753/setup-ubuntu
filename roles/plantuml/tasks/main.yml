@@ -1,3 +1,5 @@
-- name: Install
-  become: yes
-  apt: name=plantuml state=present
+- name: Install plantuml
+  become: true
+  ansible.builtin.apt:
+    name: plantuml
+    state: present

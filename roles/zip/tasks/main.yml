@@ -1,5 +1,7 @@
-- name: Install
-  become: yes
-  apt:
-    name: ['zip', 'unzip']
+- name: Install zip and unzip
+  become: true
+  ansible.builtin.apt:
+    name:
+      - zip
+      - unzip
     state: present

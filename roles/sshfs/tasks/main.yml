@@ -1,3 +1,5 @@
-- name: Install
-  become: yes
-  apt: name=sshfs state=present
+- name: Install sshfs
+  become: true
+  ansible.builtin.apt:
+    name: sshfs
+    state: present

@@ -1,5 +1,5 @@
 - name: Remove apache2
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     name: apache2
     state: absent
