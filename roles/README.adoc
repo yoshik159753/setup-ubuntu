@@ -163,8 +163,8 @@ a|プログラミング言語
 |Web Browser
 |-
 
-|SetPrompt
-|sh のプロンプトを設定
+|bash-prompt
+|bash のプロンプトに git 統合を追加し PS1 を設定
 |-
 
 |direnv

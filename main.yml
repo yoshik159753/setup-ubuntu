@@ -38,7 +38,7 @@
     - PHP
     - Ruby
     - GoogleChrome
-    - SetPrompt
+    - bash-prompt
     - direnv
     - SoundConverter
     - LXD
