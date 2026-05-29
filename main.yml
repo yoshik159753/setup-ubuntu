@@ -4,7 +4,6 @@
     USR_LOCAL_BIN: "/usr/local/bin"
     KEYRINGS_PATH: "/etc/apt/keyrings"
     GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_env.HOME }}/.config/autostart"
-    DIRENV_VERSION: 'v2.32.3'
     POSTGRESQL_CLIENT_VER: '15'
   roles:
     - apt-get-upgrade

@@ -1,13 +1,12 @@
-- name: Download
-  become: yes
-  get_url:
-    url: "https://github.com/direnv/direnv/releases/download/{{ DIRENV_VERSION }}/direnv.linux-amd64"
-    dest: "{{ USR_LOCAL_BIN }}/direnv"
-    mode: "a+rx"
-    validate_certs: no
+- name: Install direnv
+  become: true
+  ansible.builtin.apt:
+    name: direnv
+    state: latest
+    update_cache: yes
 
 - name: Setup
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
       eval "$(direnv hook bash)"
