@@ -1,3 +1,5 @@
-- name: Install
-  become: yes
-  apt: name=graphviz state=present
+- name: Install graphviz
+  become: true
+  ansible.builtin.apt:
+    name: graphviz
+    state: present

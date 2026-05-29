@@ -6,15 +6,15 @@
 
 - name: Add specified repository into sources list
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [signed-by={{ KEYRINGS_PATH }}/dropbox.asc] https://linux.dropbox.com/ubuntu {{ ansible_lsb.codename }} main"
     filename: dropbox
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install dropbox
   become: true
-  apt:
+  ansible.builtin.apt:
     name: dropbox
     state: present
   notify:

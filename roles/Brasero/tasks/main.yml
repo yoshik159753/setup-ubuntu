@@ -1,3 +1,5 @@
-- name: Install
-  become: yes
-  apt: name=brasero state=present
+- name: Install Brasero
+  become: true
+  ansible.builtin.apt:
+    name: brasero
+    state: present

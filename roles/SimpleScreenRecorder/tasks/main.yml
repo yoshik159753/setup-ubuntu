@@ -1,5 +1,5 @@
-- name: Install
-  become: yes
-  apt:
+- name: Install simplescreenrecorder
+  become: true
+  ansible.builtin.apt:
     name: simplescreenrecorder
     state: present

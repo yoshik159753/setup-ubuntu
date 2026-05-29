@@ -3,7 +3,7 @@
   ansible.builtin.apt:
     name: direnv
     state: latest
-    update_cache: yes
+    update_cache: true
 
 - name: Setup
   ansible.builtin.blockinfile:

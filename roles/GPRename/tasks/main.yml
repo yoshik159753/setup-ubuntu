@@ -1,6 +1,6 @@
-- name: Install
-  become: yes
-  apt:
+- name: Install gprename
+  become: true
+  ansible.builtin.apt:
     name: gprename
     state: present
-    update_cache: yes
+    update_cache: true

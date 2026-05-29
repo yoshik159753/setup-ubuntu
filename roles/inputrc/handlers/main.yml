@@ -1,2 +1,3 @@
 - name: Warning for inputrc
-  debug: msg="inputrcの設定ファイルを配置しました。古いファイルはバックアップしています"
+  ansible.builtin.debug:
+    msg: "inputrcの設定ファイルを配置しました。古いファイルはバックアップしています"

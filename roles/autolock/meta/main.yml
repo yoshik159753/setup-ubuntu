@@ -1,3 +1,3 @@
 ---
 dependencies:
-  - { role: make-autostart-directory }
+  - role: make-autostart-directory

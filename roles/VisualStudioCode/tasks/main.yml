@@ -1,29 +1,29 @@
 - name: Install dependent packages
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     name: apt-transport-https
     state: latest
-    update_cache: yes
+    update_cache: true
 
-- name: Add GPG key.
+- name: Add GPG key
   become: true
   ansible.builtin.get_url:
     url: https://packages.microsoft.com/keys/microsoft.asc
     dest: "{{ KEYRINGS_PATH }}/microsoft.asc"
 
-- name: Use the following command to set up the stable repository.
+- name: Set up the stable repository
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/microsoft.asc] https://packages.microsoft.com/repos/vscode stable main"
     filename: vscode
     state: present
-    update_cache: yes
+    update_cache: true
 
-- name: Install
-  become: yes
-  apt:
+- name: Install code
+  become: true
+  ansible.builtin.apt:
     name: code
     state: latest
-    update_cache: yes
+    update_cache: true
 
 # https://code.visualstudio.com/docs/setup/linux

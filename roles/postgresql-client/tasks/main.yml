@@ -6,17 +6,17 @@
 
 - name: Add specified repository into sources list
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/postgresql.asc] http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main'
     filename: pgdg
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install postgresql-client
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     name: postgresql-client
     state: latest
-    update_cache: yes
+    update_cache: true
 
 # ref. https://www.postgresql.org/download/linux/ubuntu/

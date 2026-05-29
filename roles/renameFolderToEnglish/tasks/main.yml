@@ -1,18 +1,26 @@
-- name: Install
-  become: yes
-  apt: name=xdg-user-dirs state=present
+- name: Install xdg-user-dirs
+  become: true
+  ansible.builtin.apt:
+    name: xdg-user-dirs
+    state: present
+
 - name: Create directories
-  shell: LANG=C xdg-user-dirs-update --force
+  ansible.builtin.shell: LANG=C xdg-user-dirs-update --force
   args:
     creates: "{{ ansible_env.HOME }}/Documents"
   notify:
     - Please run manually
     - Please delete the folder you do not need
     - Reboot
+
 - name: Update bookmark
-  template: src=bookmarks.j2 dest=~/.config/gtk-3.0/bookmarks backup=yes
+  ansible.builtin.template:
+    src: bookmarks.j2
+    dest: ~/.config/gtk-3.0/bookmarks
+    backup: true
   notify:
     - Warning for bookmark
+
 # 消すと問題がありそうなので残す
 # - name: Delete old directories
 #   file: path=~/{{ item }} state=absent

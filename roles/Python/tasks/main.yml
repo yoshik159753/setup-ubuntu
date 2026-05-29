@@ -1,27 +1,23 @@
 - name: Install Python3
-  become: yes
-  apt:
-    name: ["python3", "python3-pip"]
+  become: true
+  ansible.builtin.apt:
+    name:
+      - python3
+      - python3-pip
+      - virtualenv
     state: present
-    update_cache: yes
-
-# 環境分離ツール(Python用)
-- name: Install virtualenv
-  become: yes
-  apt:
-    name: virtualenv
-    state: present
+    update_cache: true
 
 - name: Install pyenv
   block:
     - name: Check out pyenv where you want it installed
-      git:
+      ansible.builtin.git:
         dest: "{{ ansible_env.HOME }}/.pyenv"
         repo: "https://github.com/pyenv/pyenv.git"
       ignore_errors: "{{ ansible_check_mode }}"
 
     - name: Define environment variable
-      blockinfile:
+      ansible.builtin.blockinfile:
         path: "{{ ansible_env.HOME }}/.bashrc"
         block: |
           export PYENV_ROOT="$HOME/.pyenv"
@@ -33,20 +29,36 @@
       notify:
         - Restart shell to activate pyenv
 
-    - name: Install dependency packages
-      become: yes
-      apt:
-        name: ["make", "build-essential", "libssl-dev", "zlib1g-dev", "libbz2-dev", "libreadline-dev", "libsqlite3-dev", "wget", "curl", "llvm", "libncurses5-dev", "xz-utils", "tk-dev", "libxml2-dev", "libxmlsec1-dev", "libffi-dev", "liblzma-dev"]
+    - name: Install pyenv build dependencies
+      become: true
+      ansible.builtin.apt:
+        name:
+          - make
+          - build-essential
+          - libssl-dev
+          - zlib1g-dev
+          - libbz2-dev
+          - libreadline-dev
+          - libsqlite3-dev
+          - wget
+          - curl
+          - llvm
+          - libncurses5-dev
+          - xz-utils
+          - tk-dev
+          - libxml2-dev
+          - libxmlsec1-dev
+          - libffi-dev
+          - liblzma-dev
         state: present
-        update_cache: yes
+        update_cache: true
 
     # ref. https://github.com/pyenv/pyenv#installation
     # ref. https://github.com/pyenv/pyenv/wiki
 
 - name: Install poetry
-  become: yes
-  apt:
-    name: "python3-poetry"
+  become: true
+  ansible.builtin.apt:
+    name: python3-poetry
     state: present
-    update_cache: yes
-
+    update_cache: true

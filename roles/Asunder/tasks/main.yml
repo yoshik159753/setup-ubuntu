@@ -1,5 +1,7 @@
-- name: Install
-  become: yes
-  apt: name=asunder state=present
+- name: Install asunder
+  become: true
+  ansible.builtin.apt:
+    name: asunder
+    state: present
   notify:
     - Notification about the cdrom device

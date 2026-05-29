@@ -1,10 +1,19 @@
 - name: Remove vim-tiny
-  become: yes
-  apt: name=vim-tiny state=absent
+  become: true
+  ansible.builtin.apt:
+    name: vim-tiny
+    state: absent
+
 - name: Install vim
-  become: yes
-  apt: name=vim state=present
+  become: true
+  ansible.builtin.apt:
+    name: vim
+    state: present
+
 - name: Copy vimrc
-  copy: src=vimrc dest={{ ansible_env.HOME }}/.vimrc backup=yes
+  ansible.builtin.copy:
+    src: vimrc
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+    backup: true
   notify:
     - Warning for vim

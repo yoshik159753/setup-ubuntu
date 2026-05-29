@@ -1,5 +1,5 @@
-- name: Install
-  become: yes
-  apt:
+- name: Install virtualbox
+  become: true
+  ansible.builtin.apt:
     name: virtualbox
     state: present

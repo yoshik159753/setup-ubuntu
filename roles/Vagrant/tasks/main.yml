@@ -10,10 +10,10 @@
     repo: "deb [signed-by={{ KEYRINGS_PATH }}/hashicorp.asc] https://apt.releases.hashicorp.com {{ ansible_lsb.codename }} main"
     filename: hashicorp
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install Vagrant
-  become: yes
+  become: true
   ansible.builtin.apt:
     name: vagrant
     state: latest

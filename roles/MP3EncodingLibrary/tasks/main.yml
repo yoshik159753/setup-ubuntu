@@ -1,3 +1,5 @@
-- name: Install
-  become: yes
-  apt: name=lame state=present
+- name: Install lame
+  become: true
+  ansible.builtin.apt:
+    name: lame
+    state: present

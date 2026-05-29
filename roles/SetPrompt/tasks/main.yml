@@ -8,7 +8,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GIT-PROMPT.SH"
 
 - name: Set prompt
-  blockinfile:
+  ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
       if [ $UID -eq 0 ]; then

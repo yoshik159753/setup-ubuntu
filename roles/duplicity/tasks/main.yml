@@ -1,5 +1,5 @@
-- name: Install
-  become: yes
-  apt:
+- name: Install duplicity
+  become: true
+  ansible.builtin.apt:
     name: duplicity
     state: present

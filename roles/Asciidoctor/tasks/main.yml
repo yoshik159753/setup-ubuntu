@@ -1,13 +1,9 @@
-- name: Install asciidoctor-diagram
-  become: yes
-  gem:
-    name: asciidoctor-diagram
-    user_install: no
+- name: Install asciidoctor and asciidoctor-diagram
+  become: true
+  community.general.gem:
+    name: "{{ item }}"
+    user_install: false
     state: present
-
-- name: Install asciidoctor
-  become: yes
-  gem:
-    name: asciidoctor
-    user_install: no
-    state: present
+  loop:
+    - asciidoctor-diagram
+    - asciidoctor

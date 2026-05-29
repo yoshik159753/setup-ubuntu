@@ -1,23 +1,23 @@
-- name: Install
-  become: yes
-  snap:
+- name: Install lxd
+  become: true
+  community.general.snap:
     name: lxd
     state: present
 
 - name: Add lxd group
-  become: yes
-  group:
+  become: true
+  ansible.builtin.group:
     name: lxd
     state: present
   notify:
     - Restart lxd service
 
 - name: Apply lxd group
-  become: yes
-  user:
+  become: true
+  ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     groups: lxd
-    append: yes
+    append: true
     state: present
   notify:
     - Notify Re-login

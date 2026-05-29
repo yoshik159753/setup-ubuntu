@@ -1,6 +1,6 @@
-- name: Install
-  become: yes
-  snap:
+- name: Install shotcut
+  become: true
+  community.general.snap:
     name: shotcut
-    classic: yes
+    classic: true
     state: present

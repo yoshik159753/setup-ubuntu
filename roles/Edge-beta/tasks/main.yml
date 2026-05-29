@@ -6,17 +6,17 @@
 
 - name: Add specified repository into sources list
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/microsoft.asc] https://packages.microsoft.com/repos/edge stable main"
     filename: microsoft-edge-beta.list
     state: present
-    update_cache: yes
+    update_cache: true
 
-- name: Install Edge-beta.
+- name: Install Edge-beta
   become: true
-  apt:
+  ansible.builtin.apt:
     name: microsoft-edge-beta
     state: latest
-    update_cache: yes
+    update_cache: true
 
 # ref. https://www.microsoft.com/en-us/edge/download/insider

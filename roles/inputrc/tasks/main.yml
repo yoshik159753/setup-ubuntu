@@ -1,4 +1,7 @@
 - name: Copy inputrc
-  copy: src=inputrc dest={{ ansible_env.HOME }}/.inputrc backup=yes
+  ansible.builtin.copy:
+    src: inputrc
+    dest: "{{ ansible_env.HOME }}/.inputrc"
+    backup: true
   notify:
     - Warning for inputrc

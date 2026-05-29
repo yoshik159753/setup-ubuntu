@@ -10,7 +10,7 @@
     repo: "deb [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_lsb.codename }} main"
     filename: git
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Add specified repository into sources list (src)
   become: true
@@ -18,7 +18,7 @@
     repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_lsb.codename }} main"
     filename: git
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install git
   become: true
@@ -28,7 +28,7 @@
       - git-svn
       - gitk
     state: latest
-    update_cache: yes
+    update_cache: true
 
 - name: bash completion support for core Git
   ansible.builtin.blockinfile:
@@ -40,29 +40,29 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GIT-COMPLETION.BASH"
 
 - name: Set git config
-  ansible.builtin.git_config:
+  community.general.git_config:
     name: "{{ item.name }}"
     scope: global
     value: "{{ item.value }}"
-  with_items:
-    - { name: 'alias.branches', value: 'branch -a'}
-    - { name: 'alias.co', value: 'checkout'}
-    - { name: 'alias.ci', value: 'commit -v'}
-    - { name: 'alias.df', value: 'diff'}
-    - { name: 'alias.dfcached', value: 'diff --cached'}
-    - { name: 'alias.dfhead', value: 'diff HEAD'}
-    - { name: 'alias.lg', value: 'log --graph --pretty=oneline --abbrev-commit --decorate=full'}
-    - { name: 'alias.lgg', value: 'log --graph --pretty=short --abbrev-commit --decorate=full'}
-    - { name: 'alias.lggg', value: 'log --graph --pretty=fuller --decorate=full'}
-    - { name: 'alias.remotes', value: 'remote -v'}
-    - { name: 'alias.s', value: 'status'}
-    - { name: 'alias.stashes', value: 'stash list'}
-    - { name: 'alias.dfls', value: 'diff --stat --name-only'}
-    - { name: 'alias.sw', value: 'switch'}
-    - { name: 'alias.rs', value: 'restore'}
-    - { name: 'color.ui', value: 'true'}
-    - { name: 'core.editor', value: 'vim'}
-    - { name: 'core.pager', value: 'less -S -x4'}
-    - { name: 'core.quotepath', value: 'false'}
-    - { name: 'fetch.prune', value: 'true'}
-    - { name: 'core.commentchar', value: ';'}
+  loop:
+    - { name: 'alias.branches', value: 'branch -a' }
+    - { name: 'alias.co', value: 'checkout' }
+    - { name: 'alias.ci', value: 'commit -v' }
+    - { name: 'alias.df', value: 'diff' }
+    - { name: 'alias.dfcached', value: 'diff --cached' }
+    - { name: 'alias.dfhead', value: 'diff HEAD' }
+    - { name: 'alias.lg', value: 'log --graph --pretty=oneline --abbrev-commit --decorate=full' }
+    - { name: 'alias.lgg', value: 'log --graph --pretty=short --abbrev-commit --decorate=full' }
+    - { name: 'alias.lggg', value: 'log --graph --pretty=fuller --decorate=full' }
+    - { name: 'alias.remotes', value: 'remote -v' }
+    - { name: 'alias.s', value: 'status' }
+    - { name: 'alias.stashes', value: 'stash list' }
+    - { name: 'alias.dfls', value: 'diff --stat --name-only' }
+    - { name: 'alias.sw', value: 'switch' }
+    - { name: 'alias.rs', value: 'restore' }
+    - { name: 'color.ui', value: 'true' }
+    - { name: 'core.editor', value: 'vim' }
+    - { name: 'core.pager', value: 'less -S -x4' }
+    - { name: 'core.quotepath', value: 'false' }
+    - { name: 'fetch.prune', value: 'true' }
+    - { name: 'core.commentchar', value: ';' }

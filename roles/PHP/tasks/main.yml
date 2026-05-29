@@ -1,34 +1,22 @@
 - name: Install PHP
-  become: yes
-  apt:
-    name: php
-    state: present
-    update_cache: yes
-
-- name: Install PHP extensions
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     name:
+      - php
       - php-xml
       - php-sqlite3
       - php-mysql
       - php-pgsql
+      - composer
     state: present
-    update_cache: yes
-
-- name: Install Composer
-  become: yes
-  apt:
-    name: composer
-    state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Install php-cs-fixer
-  become: yes
-  get_url:
+  become: true
+  ansible.builtin.get_url:
     url: "https://cs.symfony.com/download/php-cs-fixer-v2.phar"
     dest: "/usr/local/bin/php-cs-fixer"
     mode: "+x"
-    validate_certs: no
+    validate_certs: false
 
 # ref. https://the2g.com/post/visual-studio-code-php-formatter

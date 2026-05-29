@@ -1,6 +1,6 @@
-- name: Install
-  become: yes
-  apt:
+- name: Install openssh-server
+  become: true
+  ansible.builtin.apt:
     name: openssh-server
     state: present
   notify:

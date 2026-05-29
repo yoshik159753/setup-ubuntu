@@ -1,6 +1,6 @@
 - name: Install Ruby
-  become: yes
-  apt:
+  become: true
+  ansible.builtin.apt:
     name: ruby
     state: present
-    update_cache: yes
+    update_cache: true

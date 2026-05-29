@@ -1,11 +1,11 @@
 - name: Install pandoc
-  become: yes
+  become: true
   ansible.builtin.apt:
     name: pandoc
     state: latest
 
 - name: Install PDF conversion packages
-  become: yes
+  become: true
   ansible.builtin.apt:
     name:
       - texlive-xetex

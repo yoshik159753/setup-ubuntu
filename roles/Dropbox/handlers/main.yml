@@ -1,2 +1,3 @@
 - name: Notification about installation
-  debug: msg="少々待つとインストーラーが起動するはずなので指示に従ってください"
+  ansible.builtin.debug:
+    msg: "少々待つとインストーラーが起動するはずなので指示に従ってください"
