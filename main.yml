@@ -7,7 +7,6 @@
     VAGRANT_VER: 2.3.7
     DIRENV_VERSION: 'v2.32.3'
     POSTGRESQL_CLIENT_VER: '15'
-    TERRAFORM_VER: "1.5.3"
   roles:
     - apt-get-upgrade
     - make-autostart-directory
