@@ -1,13 +1,18 @@
-- name: Fetch rustup
-  ansible.builtin.uri:
-    url: https://sh.rustup.rs
-    return_content: true
-  register: rustup_installer
+- name: Check if rustup is installed
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.cargo/bin/rustup"
+  register: rustup_bin
 
-- name: Run rustup installer
-  ansible.builtin.shell:
-    cmd: sh -s -- -y
-    stdin: "{{ rustup_installer.content }}"
+- name: Install Rust via rustup
+  when: not rustup_bin.stat.exists
+  block:
+    - name: Fetch rustup installer
+      ansible.builtin.uri:
+        url: https://sh.rustup.rs
+        return_content: true
+      register: rustup_installer
 
-# TODO : べき等性が保てていないのでどうにかしたい
-# ref. https://ymotongpoo.hatenablog.com/entry/2021/03/01/224610
+    - name: Run rustup installer
+      ansible.builtin.shell:
+        cmd: sh -s -- -y
+        stdin: "{{ rustup_installer.content }}"
