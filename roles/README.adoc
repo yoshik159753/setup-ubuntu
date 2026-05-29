@@ -256,10 +256,8 @@ a| * zip
 a|プログラミング言語
 
 * Python3
-* virtualenv
-* pyenv
-* poetry
-|git
+* uv (パッケージ・バージョン・プロジェクト管理)
+|-
 
 |Peek
 |animated GIF recorder

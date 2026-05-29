@@ -1,7 +1,0 @@
-- name: Restart shell to activate pyenv
-  ansible.builtin.debug:
-    msg: "shell を再起動することで pyenv が有効化されます"
-
-- name: Restart shell to activate poetry
-  ansible.builtin.debug:
-    msg: "shell を再起動することで poetry が有効化されます"
