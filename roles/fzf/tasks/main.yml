@@ -1,0 +1,7 @@
+- name: Install fzf
+  become: true
+  tags: fzf
+  ansible.builtin.apt:
+    name: fzf
+    state: present
+    update_cache: true

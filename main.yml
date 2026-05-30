@@ -58,3 +58,4 @@
     - gcloud-cli
     - claude-code
     - losslesscut
+    - fzf
