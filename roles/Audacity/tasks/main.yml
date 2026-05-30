@@ -1,5 +1,6 @@
 - name: Install Audacity
   become: true
+  tags: audacity
   ansible.builtin.apt:
     name: audacity
     state: present

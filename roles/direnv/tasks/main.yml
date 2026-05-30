@@ -1,11 +1,13 @@
 - name: Install direnv
   become: true
+  tags: direnv
   ansible.builtin.apt:
     name: direnv
     state: latest
     update_cache: true
 
 - name: Setup
+  tags: direnv
   ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |

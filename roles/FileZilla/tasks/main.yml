@@ -1,5 +1,6 @@
 - name: Install filezilla
   become: true
+  tags: filezilla
   ansible.builtin.apt:
     name: filezilla
     state: present

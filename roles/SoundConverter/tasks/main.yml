@@ -1,5 +1,6 @@
 - name: Install soundconverter
   become: true
+  tags: soundconverter
   ansible.builtin.apt:
     name: soundconverter
     state: present

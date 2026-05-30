@@ -1,11 +1,13 @@
 - name: Add apt key for GoogleChrome
   become: true
+  tags: googlechrome
   ansible.builtin.get_url:
     url: https://dl.google.com/linux/linux_signing_key.pub
     dest: "{{ KEYRINGS_PATH }}/google.asc"
 
 - name: Add specified repository into sources list
   become: true
+  tags: googlechrome
   ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/google.asc] https://dl.google.com/linux/chrome/deb/ stable main'
     filename: google-chrome
@@ -14,6 +16,7 @@
 
 - name: Install GoogleChrome
   become: true
+  tags: googlechrome
   ansible.builtin.apt:
     name: google-chrome-stable
     state: present

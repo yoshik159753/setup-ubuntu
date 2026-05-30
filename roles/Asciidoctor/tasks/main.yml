@@ -1,5 +1,6 @@
 - name: Install asciidoctor and asciidoctor-diagram
   become: true
+  tags: asciidoctor
   community.general.gem:
     name: "{{ item }}"
     user_install: false

@@ -1,5 +1,6 @@
 - name: Install duplicity
   become: true
+  tags: duplicity
   ansible.builtin.apt:
     name: duplicity
     state: present

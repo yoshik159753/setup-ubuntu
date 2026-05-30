@@ -1,5 +1,6 @@
 - name: Install openssh-server
   become: true
+  tags: sshd
   ansible.builtin.apt:
     name: openssh-server
     state: present

@@ -1,5 +1,6 @@
 - name: Install losslesscut
   become: true
+  tags: losslesscut
   community.general.snap:
     name: losslesscut
     state: present

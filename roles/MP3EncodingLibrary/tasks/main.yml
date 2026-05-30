@@ -1,5 +1,6 @@
 - name: Install lame
   become: true
+  tags: mp3encodinglibrary
   ansible.builtin.apt:
     name: lame
     state: present

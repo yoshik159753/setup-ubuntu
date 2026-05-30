@@ -1,4 +1,5 @@
 - name: bash git prompt support
+  tags: bash-prompt
   ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
@@ -8,6 +9,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GIT-PROMPT.SH"
 
 - name: Set prompt
+  tags: bash-prompt
   ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |

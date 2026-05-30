@@ -1,10 +1,12 @@
 - name: Install xdg-user-dirs
   become: true
+  tags: renamefoldertoenglish
   ansible.builtin.apt:
     name: xdg-user-dirs
     state: present
 
 - name: Create directories
+  tags: renamefoldertoenglish
   ansible.builtin.shell: LANG=C xdg-user-dirs-update --force
   args:
     creates: "{{ ansible_env.HOME }}/Documents"
@@ -14,6 +16,7 @@
     - Reboot
 
 - name: Update bookmark
+  tags: renamefoldertoenglish
   ansible.builtin.template:
     src: bookmarks.j2
     dest: ~/.config/gtk-3.0/bookmarks

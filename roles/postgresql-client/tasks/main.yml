@@ -1,11 +1,13 @@
 - name: Add apt key for PostgreSQL
   become: true
+  tags: postgresql-client
   ansible.builtin.get_url:
     url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
     dest: "{{ KEYRINGS_PATH }}/postgresql.asc"
 
 - name: Add specified repository into sources list
   become: true
+  tags: postgresql-client
   ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/postgresql.asc] http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main'
     filename: pgdg
@@ -14,6 +16,7 @@
 
 - name: Install postgresql-client
   become: true
+  tags: postgresql-client
   ansible.builtin.apt:
     name: postgresql-client
     state: latest

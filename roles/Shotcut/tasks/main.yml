@@ -1,5 +1,6 @@
 - name: Install shotcut
   become: true
+  tags: shotcut
   community.general.snap:
     name: shotcut
     classic: true

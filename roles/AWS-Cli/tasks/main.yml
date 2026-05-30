@@ -1,5 +1,6 @@
 - name: Install awscli
   become: true
+  tags: aws-cli
   ansible.builtin.apt:
     name: awscli
     state: present

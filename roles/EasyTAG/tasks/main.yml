@@ -1,5 +1,6 @@
 - name: Install EasyTAG
   become: true
+  tags: easytag
   ansible.builtin.apt:
     name: easytag
     state: present

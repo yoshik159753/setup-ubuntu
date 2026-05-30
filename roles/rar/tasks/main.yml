@@ -1,5 +1,6 @@
 - name: Install rar and unrar
   become: true
+  tags: rar
   ansible.builtin.apt:
     name:
       - rar

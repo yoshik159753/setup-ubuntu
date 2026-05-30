@@ -1,5 +1,6 @@
 - name: Install tree
   become: true
+  tags: tree
   ansible.builtin.apt:
     name: tree
     state: present

@@ -1,5 +1,6 @@
 - name: Install virtualbox
   become: true
+  tags: virtualbox
   ansible.builtin.apt:
     name: virtualbox
     state: present

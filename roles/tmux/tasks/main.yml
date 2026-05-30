@@ -1,5 +1,6 @@
 - name: Install tmux
   become: true
+  tags: tmux
   ansible.builtin.apt:
     name: tmux
     state: present

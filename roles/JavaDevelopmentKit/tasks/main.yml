@@ -1,5 +1,6 @@
 - name: Install default-jdk
   become: true
+  tags: javadevelopmentkit
   ansible.builtin.apt:
     name: default-jdk
     state: present

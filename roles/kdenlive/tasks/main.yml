@@ -1,11 +1,13 @@
 - name: Add apt key
   become: true
+  tags: kdenlive
   ansible.builtin.get_url:
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xa59e5ebfccc61564d6d4365b2763b0ee7709fe97
     dest: "{{ KEYRINGS_PATH }}/kdenlive.asc"
 
 - name: Add specified repository into sources list
   become: true
+  tags: kdenlive
   ansible.builtin.apt_repository:
     repo: "deb [signed-by={{ KEYRINGS_PATH }}/kdenlive.asc] https://ppa.launchpadcontent.net/kdenlive/kdenlive-stable/ubuntu {{ ansible_lsb.codename }} main"
     filename: kdenlive
@@ -14,6 +16,7 @@
 
 - name: Add specified repository into sources list (src)
   become: true
+  tags: kdenlive
   ansible.builtin.apt_repository:
     repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/kdenlive.asc] https://ppa.launchpadcontent.net/kdenlive/kdenlive-stable/ubuntu {{ ansible_lsb.codename }} main"
     filename: kdenlive
@@ -22,6 +25,7 @@
 
 - name: Install kdenlive
   become: true
+  tags: kdenlive
   ansible.builtin.apt:
     name: kdenlive
     state: present

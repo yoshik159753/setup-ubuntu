@@ -1,5 +1,6 @@
 - name: Install mysql-client
   become: true
+  tags: mysql-client
   ansible.builtin.apt:
     name: mysql-client
     state: present

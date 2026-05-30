@@ -1,5 +1,6 @@
 - name: Install meld
   become: true
+  tags: meld
   ansible.builtin.apt:
     name: meld
     state: present

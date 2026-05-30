@@ -1,5 +1,6 @@
 - name: Install gprename
   become: true
+  tags: gprename
   ansible.builtin.apt:
     name: gprename
     state: present

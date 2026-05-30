@@ -1,11 +1,13 @@
 - name: Add apt key
   become: true
+  tags: git
   ansible.builtin.get_url:
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xE363C90F8F1B6217
     dest: "{{ KEYRINGS_PATH }}/git.asc"
 
 - name: Add specified repository into sources list
   become: true
+  tags: git
   ansible.builtin.apt_repository:
     repo: "deb [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_lsb.codename }} main"
     filename: git
@@ -14,6 +16,7 @@
 
 - name: Add specified repository into sources list (src)
   become: true
+  tags: git
   ansible.builtin.apt_repository:
     repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_lsb.codename }} main"
     filename: git
@@ -22,6 +25,7 @@
 
 - name: Install git
   become: true
+  tags: git
   ansible.builtin.apt:
     name:
       - git
@@ -31,6 +35,7 @@
     update_cache: true
 
 - name: bash completion support for core Git
+  tags: git
   ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     block: |
@@ -40,6 +45,7 @@
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GIT-COMPLETION.BASH"
 
 - name: Set git config
+  tags: git
   community.general.git_config:
     name: "{{ item.name }}"
     scope: global
