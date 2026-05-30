@@ -62,7 +62,8 @@ a|Version Control System
 * git-svn
 * gitk
 * git config
-|-
+* gsw alias (git switch + fzf)
+|fzf
 
 |inputrc
 |bash による補完時の大文字小文字を無視

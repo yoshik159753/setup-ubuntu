@@ -44,6 +44,17 @@
       fi
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GIT-COMPLETION.BASH"
 
+- name: Add gsw alias for git switch with fzf
+  tags: git
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: |
+      gsw() {
+        local branch
+        branch=$(git branch --all | grep -v HEAD | sed 's|remotes/origin/||' | sed 's/^[* ]*//' | sort -u | fzf) && git switch "$branch"
+      }
+    marker: "# {mark} ANSIBLE MANAGED BLOCK FOR GSW"
+
 - name: Set git config
   tags: git
   community.general.git_config:
