@@ -1,17 +1,20 @@
 - name: Install gnome-screensaver
   become: true
+  tags: autolock
   ansible.builtin.apt:
     name: gnome-screensaver
     state: present
 
 - name: Copy script
   become: true
+  tags: autolock
   ansible.builtin.copy:
     src: autolock.sh
     dest: "{{ USR_LOCAL_BIN }}/autolock.sh"
     mode: "0755"
 
 - name: Copy configuration file
+  tags: autolock
   ansible.builtin.template:
     src: autolock.sh.desktop.j2
     dest: "{{ GNOME_USER_AUTOSTART_DIRECTORY }}/autolock.sh.desktop"

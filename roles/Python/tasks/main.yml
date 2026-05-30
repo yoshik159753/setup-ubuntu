@@ -1,5 +1,6 @@
 - name: Install Python3
   become: true
+  tags: python
   ansible.builtin.apt:
     name:
       - python3
@@ -8,11 +9,13 @@
     update_cache: true
 
 - name: Check if uv is installed
+  tags: python
   ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.local/bin/uv"
   register: uv_bin
 
 - name: Install uv
+  tags: python
   when: not uv_bin.stat.exists
   block:
     - name: Fetch uv installer

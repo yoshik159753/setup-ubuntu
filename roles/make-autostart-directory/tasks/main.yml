@@ -1,4 +1,5 @@
 - name: Make autostart directory
+  tags: make-autostart-directory
   ansible.builtin.file:
     path: "{{ GNOME_USER_AUTOSTART_DIRECTORY }}"
     state: directory

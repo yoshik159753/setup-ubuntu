@@ -1,5 +1,6 @@
 - name: Install Geeqie
   become: true
+  tags: geeqie
   ansible.builtin.apt:
     name: geeqie
     state: present

@@ -1,5 +1,6 @@
 - name: Remove apache2
   become: true
+  tags: remove-apache2
   ansible.builtin.apt:
     name: apache2
     state: absent

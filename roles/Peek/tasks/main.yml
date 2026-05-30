@@ -1,5 +1,6 @@
 - name: Install Peek
   become: true
+  tags: peek
   ansible.builtin.apt:
     name: peek
     state: latest

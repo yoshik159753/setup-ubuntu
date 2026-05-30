@@ -1,5 +1,6 @@
 - name: Install Brasero
   become: true
+  tags: brasero
   ansible.builtin.apt:
     name: brasero
     state: present

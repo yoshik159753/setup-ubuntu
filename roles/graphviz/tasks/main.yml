@@ -1,5 +1,6 @@
 - name: Install graphviz
   become: true
+  tags: graphviz
   ansible.builtin.apt:
     name: graphviz
     state: present

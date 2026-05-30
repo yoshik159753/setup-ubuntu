@@ -1,5 +1,6 @@
 - name: Install steam
   become: true
+  tags: steam
   ansible.builtin.apt:
     name: steam
     state: present

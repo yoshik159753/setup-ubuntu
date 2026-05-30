@@ -1,9 +1,11 @@
 - name: Check if rustup is installed
+  tags: rust
   ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.cargo/bin/rustup"
   register: rustup_bin
 
 - name: Install Rust via rustup
+  tags: rust
   when: not rustup_bin.stat.exists
   block:
     - name: Fetch rustup installer

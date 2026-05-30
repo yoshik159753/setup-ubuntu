@@ -62,7 +62,8 @@ a|Version Control System
 * git-svn
 * gitk
 * git config
-|-
+* gsw alias (git switch + fzf)
+|fzf
 
 |inputrc
 |bash による補完時の大文字小文字を無視
@@ -281,5 +282,9 @@ a|プログラミング言語
 
 |losslesscut
 |動画・音声のロスレスカット編集ツール
+|-
+
+|fzf
+|コマンドライン用ファジーファインダー
 |-
 |===

@@ -7,6 +7,15 @@ ansible-playbook -i localhost, --connection local main.yml --ask-become-pass
 
 # 途中から実行
 ansible-playbook -i localhost, --connection local main.yml --ask-become-pass --start-at='rolename : taskname'
+
+# 利用可能なタグを確認
+ansible-playbook -i localhost, --connection local main.yml --list-tags
+
+# 特定のタグのみ実行
+ansible-playbook -i localhost, --connection local main.yml --ask-become-pass --tags git
+
+# 複数のタグを指定
+ansible-playbook -i localhost, --connection local main.yml --ask-become-pass --tags "git,nodejs,docker"
 ----
 
 [source,sh]

@@ -1,5 +1,6 @@
 - name: Install redoc-cli
   become: true
+  tags: redoc-cli
   community.general.npm:
     name: redoc-cli
     global: true

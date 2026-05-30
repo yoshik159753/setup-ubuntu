@@ -1,15 +1,18 @@
 - name: Get Jump latest release info
+  tags: jump
   ansible.builtin.uri:
     url: https://api.github.com/repos/gsamokovarov/jump/releases/latest
     return_content: true
   register: jump_release
 
 - name: Determine latest Jump version
+  tags: jump
   ansible.builtin.set_fact:
     jump_version: "{{ jump_release.json.tag_name | regex_replace('^v', '') }}"
 
 - name: Install Jump
   become: true
+  tags: jump
   ansible.builtin.apt:
     deb: "https://github.com/gsamokovarov/jump/releases/download/v{{ jump_version }}/jump_{{ jump_version }}_amd64.deb"
     state: present

@@ -1,5 +1,6 @@
 - name: Install plantuml
   become: true
+  tags: plantuml
   ansible.builtin.apt:
     name: plantuml
     state: present

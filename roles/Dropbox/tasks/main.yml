@@ -1,11 +1,13 @@
 - name: Add apt key
   become: true
+  tags: dropbox
   ansible.builtin.get_url:
     url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x1c61a2656fb57b7e4de0f4c1fc918b335044912e
     dest: "{{ KEYRINGS_PATH }}/dropbox.asc"
 
 - name: Add specified repository into sources list
   become: true
+  tags: dropbox
   ansible.builtin.apt_repository:
     repo: "deb [signed-by={{ KEYRINGS_PATH }}/dropbox.asc] https://linux.dropbox.com/ubuntu {{ ansible_lsb.codename }} main"
     filename: dropbox
@@ -14,6 +16,7 @@
 
 - name: Install dropbox
   become: true
+  tags: dropbox
   ansible.builtin.apt:
     name: dropbox
     state: present

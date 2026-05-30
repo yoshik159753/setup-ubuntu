@@ -1,7 +1,7 @@
-- name: Install soundconverter
+- name: Install fzf
   become: true
-  tags: soundconverter
+  tags: fzf
   ansible.builtin.apt:
-    name: soundconverter
+    name: fzf
     state: present
     update_cache: true

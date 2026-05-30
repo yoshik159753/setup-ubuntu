@@ -1,4 +1,5 @@
 - name: Configure inputrc to ignore case in completion
+  tags: inputrc
   ansible.builtin.lineinfile:
     path: "{{ ansible_env.HOME }}/.inputrc"
     create: true

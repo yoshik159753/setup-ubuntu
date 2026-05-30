@@ -1,5 +1,6 @@
 - name: Install sshfs
   become: true
+  tags: sshfs
   ansible.builtin.apt:
     name: sshfs
     state: present

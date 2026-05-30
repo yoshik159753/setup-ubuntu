@@ -1,10 +1,12 @@
 - name: Install xpad
   become: true
+  tags: xpad
   ansible.builtin.apt:
     name: xpad
     state: latest
 
 - name: Copy configuration file
+  tags: xpad
   ansible.builtin.copy:
     src: xpad.desktop
     dest: "{{ GNOME_USER_AUTOSTART_DIRECTORY }}/xpad.desktop"

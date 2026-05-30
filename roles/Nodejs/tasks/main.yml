@@ -1,4 +1,5 @@
 - name: Install NodeJs
+  tags: nodejs
   block:
     - name: Get Node.js release index
       ansible.builtin.uri:
@@ -42,6 +43,7 @@
 # https://github.com/nodesource/distributions#manual-installation
 
 - name: Install Yarn
+  tags: nodejs
   block:
     - name: Add GPG key
       become: true
