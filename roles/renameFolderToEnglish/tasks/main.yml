@@ -9,7 +9,7 @@
   tags: renamefoldertoenglish
   ansible.builtin.shell: LANG=C xdg-user-dirs-update --force
   args:
-    creates: "{{ ansible_env.HOME }}/Documents"
+    creates: "{{ ansible_facts['env']['HOME'] }}/Documents"
   notify:
     - Please run manually
     - Please delete the folder you do not need
@@ -19,7 +19,7 @@
   tags: renamefoldertoenglish
   ansible.builtin.template:
     src: bookmarks.j2
-    dest: ~/.config/gtk-3.0/bookmarks
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/gtk-3.0/bookmarks"
     backup: true
   notify:
     - Warning for bookmark
