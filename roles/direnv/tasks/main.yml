@@ -9,7 +9,7 @@
 - name: Setup
   tags: direnv
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     block: |
       eval "$(direnv hook bash)"
     marker: "# {mark} ANSIBLE MANAGED BLOCK FOR DIRENV"

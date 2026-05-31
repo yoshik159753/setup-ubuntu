@@ -9,7 +9,7 @@
   become: true
   tags: git
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_lsb.codename }} main"
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
     filename: git
     state: present
     update_cache: true
@@ -18,7 +18,7 @@
   become: true
   tags: git
   ansible.builtin.apt_repository:
-    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_lsb.codename }} main"
+    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/git.asc] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
     filename: git
     state: present
     update_cache: true
@@ -37,7 +37,7 @@
 - name: bash completion support for core Git
   tags: git
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     block: |
       if [ -f /usr/share/bash-completion/completions/git ]; then
         source /usr/share/bash-completion/completions/git
@@ -47,7 +47,7 @@
 - name: Add gsw alias for git switch with fzf
   tags: git
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     block: |
       gsw() {
         local branch

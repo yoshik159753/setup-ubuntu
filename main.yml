@@ -3,7 +3,7 @@
   vars:
     USR_LOCAL_BIN: "/usr/local/bin"
     KEYRINGS_PATH: "/etc/apt/keyrings"
-    GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_env.HOME }}/.config/autostart"
+    GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_facts['env']['HOME'] }}/.config/autostart"
   roles:
     - Audacity
     - Docker

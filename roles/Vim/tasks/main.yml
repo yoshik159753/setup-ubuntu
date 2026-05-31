@@ -16,7 +16,7 @@
   tags: vim
   ansible.builtin.copy:
     src: vimrc
-    dest: "{{ ansible_env.HOME }}/.vimrc"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
     backup: true
   notify:
     - Warning for vim

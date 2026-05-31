@@ -9,7 +9,7 @@
   become: true
   tags: vagrant
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ KEYRINGS_PATH }}/hashicorp.asc] https://apt.releases.hashicorp.com {{ ansible_lsb.codename }} main"
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/hashicorp.asc] https://apt.releases.hashicorp.com {{ ansible_facts['lsb']['codename'] }} main"
     filename: hashicorp
     state: present
     update_cache: true

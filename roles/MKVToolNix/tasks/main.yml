@@ -9,7 +9,7 @@
   become: true
   tags: mkvtoolnix
   ansible.builtin.apt_repository:
-    repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_distribution_release }} main'
+    repo: "deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_facts['distribution_release'] }} main"
     filename: mkvtoolnix.download
     state: present
     update_cache: true
@@ -18,7 +18,7 @@
   become: true
   tags: mkvtoolnix
   ansible.builtin.apt_repository:
-    repo: 'deb-src [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_distribution_release }} main'
+    repo: "deb-src [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_facts['distribution_release'] }} main"
     filename: mkvtoolnix.download
     state: present
     update_cache: true

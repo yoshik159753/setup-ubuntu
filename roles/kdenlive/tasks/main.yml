@@ -9,7 +9,7 @@
   become: true
   tags: kdenlive
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ KEYRINGS_PATH }}/kdenlive.asc] https://ppa.launchpadcontent.net/kdenlive/kdenlive-stable/ubuntu {{ ansible_lsb.codename }} main"
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/kdenlive.asc] https://ppa.launchpadcontent.net/kdenlive/kdenlive-stable/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
     filename: kdenlive
     state: present
     update_cache: true
@@ -18,7 +18,7 @@
   become: true
   tags: kdenlive
   ansible.builtin.apt_repository:
-    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/kdenlive.asc] https://ppa.launchpadcontent.net/kdenlive/kdenlive-stable/ubuntu {{ ansible_lsb.codename }} main"
+    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/kdenlive.asc] https://ppa.launchpadcontent.net/kdenlive/kdenlive-stable/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
     filename: kdenlive
     state: present
     update_cache: true

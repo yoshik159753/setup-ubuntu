@@ -9,7 +9,7 @@
   become: true
   tags: postgresql-client
   ansible.builtin.apt_repository:
-    repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/postgresql.asc] http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main'
+    repo: "deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/postgresql.asc] http://apt.postgresql.org/pub/repos/apt/ {{ ansible_facts['lsb']['codename'] }}-pgdg main"
     filename: pgdg
     state: present
     update_cache: true

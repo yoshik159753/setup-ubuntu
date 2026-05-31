@@ -9,7 +9,7 @@
   become: true
   tags: dbeaver-ce
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ KEYRINGS_PATH }}/dbeaver_ce.asc] https://ppa.launchpadcontent.net/serge-rider/dbeaver-ce/ubuntu {{ ansible_lsb.codename }} main"
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/dbeaver_ce.asc] https://ppa.launchpadcontent.net/serge-rider/dbeaver-ce/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
     filename: dbeaver_ce
     state: present
     update_cache: true
@@ -18,7 +18,7 @@
   become: true
   tags: dbeaver-ce
   ansible.builtin.apt_repository:
-    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/dbeaver_ce.asc] https://ppa.launchpadcontent.net/serge-rider/dbeaver-ce/ubuntu {{ ansible_lsb.codename }} main"
+    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/dbeaver_ce.asc] https://ppa.launchpadcontent.net/serge-rider/dbeaver-ce/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
     filename: dbeaver_ce
     state: present
     update_cache: true
