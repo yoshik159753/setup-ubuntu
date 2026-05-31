@@ -1,7 +1,7 @@
 - name: bash git prompt support
   tags: bash-prompt
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     block: |
       if ! type -t __git_ps1 1>/dev/null && [ -f /usr/lib/git-core/git-sh-prompt ]; then
         source /usr/lib/git-core/git-sh-prompt
@@ -11,7 +11,7 @@
 - name: Set prompt
   tags: bash-prompt
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     block: |
       if [ $UID -eq 0 ]; then
         export PS1='\[\033[1;31m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)" 2>/dev/null) \n# '
@@ -23,7 +23,7 @@
 # PS1 がすでに記載されていた場合に面倒なので blockinfile で対応
 # - name: Set prompt
 #   lineinfile:
-#     path: "{{ ansible_env.HOME }}/.bashrc"
+#     path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
 #     regexp: 'export PS1='
 #     line: export PS1='\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)" 2>/dev/null) \n$ '
 #     state: present

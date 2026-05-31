@@ -18,7 +18,7 @@
   become: true
   tags: lxd
   ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
+    name: "{{ ansible_facts['env']['USER'] }}"
     groups: lxd
     append: true
     state: present

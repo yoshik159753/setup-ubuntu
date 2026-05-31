@@ -1,6 +1,6 @@
 - name: Configure inputrc to ignore case in completion
   tags: inputrc
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.inputrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.inputrc"
     create: true
     line: "set completion-ignore-case on"

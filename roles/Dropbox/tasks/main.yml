@@ -9,7 +9,7 @@
   become: true
   tags: dropbox
   ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ KEYRINGS_PATH }}/dropbox.asc] https://linux.dropbox.com/ubuntu {{ ansible_lsb.codename }} main"
+    repo: "deb [signed-by={{ KEYRINGS_PATH }}/dropbox.asc] https://linux.dropbox.com/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
     filename: dropbox
     state: present
     update_cache: true
