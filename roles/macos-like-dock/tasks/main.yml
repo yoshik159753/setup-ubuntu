@@ -1,0 +1,33 @@
+- name: Install Ubuntu Dock GNOME Shell extension
+  become: true
+  tags: macos-like-dock
+  ansible.builtin.apt:
+    name: gnome-shell-ubuntu-extensions
+    state: present
+
+- name: Configure dock to look/behave like macOS
+  tags: macos-like-dock
+  community.general.dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+  loop:
+    - { key: 'dock-position', value: "'BOTTOM'" }       # 下部固定 (デフォルト: LEFT)
+    - { key: 'dock-fixed', value: 'false' }             # 常時表示 (true だと autohide/intellihide が無効化されるため false にする)
+    - { key: 'extend-height', value: 'false' }          # 画面端いっぱいに伸びず、アイコン分だけの浮動表示に (デフォルト: true)
+    - { key: 'autohide', value: 'true' }                # intellihide 有効時は重なり判定が優先されるため常時隠れる動作にはならず、画面端のマウス検知(プレッシャーバリア)を有効化するためだけに必要
+    - { key: 'intellihide', value: 'true' }             # ウィンドウが重なったときだけドックを隠す
+    - { key: 'intellihide-mode', value: "'ALL_WINDOWS'" } # 重なり判定の対象(既にデフォルトだが明示)
+    - { key: 'require-pressure-to-show', value: 'false' } # マウスを画面端に当てるだけでドックを再表示(圧力をかける操作を不要にする)
+    - { key: 'dash-max-icon-size', value: '48' }        # アイコンサイズを明示的にピン
+    - { key: 'icon-size-fixed', value: 'true' }         # アプリ数が増減してもアイコンサイズを固定
+    - { key: 'show-trash', value: 'true' }              # ドック右端にゴミ箱アイコンを表示(apps ボタンが左端にあるため右端に出る)
+    - { key: 'show-mounts', value: 'true' }             # マウントの表示
+    - { key: 'click-action', value: "'focus-or-appspread'" } # クリックでフォーカス/ウィンドウ一覧表示 (既にデフォルトだが明示)
+    - { key: 'running-indicator-style', value: "'DOTS'" } # ドット表示　(既にデフォルトだが明示)
+    - { key: 'multi-monitor', value: 'false' }          # 複数モニタへの複製表示を無効化　(既にデフォルトだが明示)
+    - { key: 'show-show-apps-button', value: 'true' }   # アプリ一覧ボタンを表示
+    - { key: 'show-apps-at-top', value: 'true' }        # アプリ一覧ボタンをドックの左端(start側)に配置
+
+# ref. https://github.com/micheleg/dash-to-dock
+# ref. https://docs.ansible.com/ansible/latest/collections/community/general/dconf_module.html
