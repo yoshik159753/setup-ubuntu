@@ -1,0 +1,18 @@
+- name: Disable suspend on lid close (clamshell mode)
+  become: true
+  tags: clamshell-mode
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: "^#?{{ item }}="
+    line: "{{ item }}=ignore"
+    backup: true
+  loop:
+    - HandleLidSwitch             # 蓋を閉じた時の動作(バッテリー駆動・外部ディスプレイ無しの場合。デフォルト: suspend)
+    - HandleLidSwitchExternalPower # 蓋を閉じた時の動作(AC電源接続中・外部ディスプレイ無しの場合。デフォルト: suspend)
+    - HandleLidSwitchDocked       # 蓋を閉じた時の動作(ドッキング中、または外部ディスプレイ2台以上接続時。デフォルトは既に ignore だが明示)
+  notify:
+    - Notify reboot for clamshell mode
+
+# ref. https://www.freedesktop.org/software/systemd/man/latest/logind.conf.html
+
+# TIPS: Lid スイッチはノートPCの蓋の開け閉めを検知するセンサーのこと

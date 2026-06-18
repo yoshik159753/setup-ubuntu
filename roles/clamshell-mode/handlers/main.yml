@@ -1,0 +1,3 @@
+- name: Notify reboot for clamshell mode
+  ansible.builtin.debug:
+    msg: "蓋を閉じてもサスペンドしない設定を反映するには再起動してください(systemd-logind の再起動はログインセッションが切断される可能性があるため非推奨)"
