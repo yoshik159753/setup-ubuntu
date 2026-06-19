@@ -4,5 +4,20 @@
   ansible.builtin.apt:
     name: openssh-server
     state: present
+
+- name: Configure sshd to allow login via key or password authentication
+  become: true
+  tags: sshd
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?{{ item.key }}\\s"
+    line: "{{ item.key }} {{ item.value }}"
+    backup: true
+  loop:
+    - { key: 'PubkeyAuthentication', value: 'yes' }          # 鍵認証でのログインを許可(既にデフォルトだが明示)
+    - { key: 'PasswordAuthentication', value: 'yes' }        # パスワードでのログインを許可(既にデフォルトだが明示)
+    - { key: 'PermitRootLogin', value: 'prohibit-password' } # root はパスワードログイン不可・鍵認証のみ許可(既にデフォルトだが明示)
   notify:
-    - Notify setting sshd config
+    - Notify reload sshd
+
+# ref. https://man.openbsd.org/sshd_config

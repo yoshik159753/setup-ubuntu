@@ -1,3 +1,3 @@
-- name: Notify setting sshd config
+- name: Notify reload sshd
   ansible.builtin.debug:
-    msg: "/etc/ssh/sshd_config の設定は手動でお願いします"
+    msg: "sshd の設定を反映するには `sudo systemctl reload ssh` を実行してください(reload はログインセッションを切断しません)"
