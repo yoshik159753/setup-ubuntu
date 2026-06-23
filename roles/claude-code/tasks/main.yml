@@ -21,4 +21,55 @@
     name: claude-code
     state: latest
 
+- name: Check if playwright-cli is installed
+  ansible.builtin.stat:
+    path: /usr/bin/playwright-cli
+  register: playwright_cli_stat
+  tags: claude-code
+
+- name: Install Playwright CLI
+  become: true
+  tags: claude-code
+  ansible.builtin.command:
+    cmd: npm install -g @playwright/cli@latest
+  when: not playwright_cli_stat.stat.exists
+
+- name: Install Playwright skills for Claude Code
+  tags: claude-code
+  ansible.builtin.command:
+    cmd: playwright-cli install --skills
+    chdir: "{{ ansible_facts['env']['HOME'] }}"
+  changed_when: false
+
+- name: Deploy Claude Code statusline script
+  tags: claude-code
+  ansible.builtin.copy:
+    src: statusline-command.sh
+    dest: "{{ ansible_facts['env']['HOME'] }}/.claude/statusline-command.sh"
+    mode: "0755"
+
+- name: Configure statusline in Claude Code settings.json
+  tags: claude-code
+  ansible.builtin.shell:
+    cmd: |
+      settings="{{ ansible_facts['env']['HOME'] }}/.claude/settings.json"
+      cmd="bash {{ ansible_facts['env']['HOME'] }}/.claude/statusline-command.sh"
+      current=""
+      [ -f "$settings" ] && current=$(jq -r '.statusLine.command // ""' "$settings" 2>/dev/null)
+      if [ "$current" = "$cmd" ]; then
+        echo "unchanged"
+      else
+        tmp=$(mktemp)
+        if [ -f "$settings" ]; then
+          jq --arg c "$cmd" '.statusLine = {"type": "command", "command": $c}' "$settings" > "$tmp"
+        else
+          jq -n --arg c "$cmd" '{"statusLine": {"type": "command", "command": $c}}' > "$tmp"
+        fi
+        mv "$tmp" "$settings"
+        echo "changed"
+      fi
+  register: jq_result
+  changed_when: jq_result.stdout == "changed"
+
 # ref. https://code.claude.com/docs/en/setup#install-with-linux-package-managers
+# ref. https://playwright.dev/agent-cli/installation
