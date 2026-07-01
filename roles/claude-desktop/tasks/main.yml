@@ -1,0 +1,36 @@
+- name: Add Claude Desktop GPG key
+  become: true
+  tags: claude-desktop
+  ansible.builtin.get_url:
+    url: https://downloads.claude.ai/claude-desktop/key.asc
+    dest: "{{ KEYRINGS_PATH }}/claude-desktop.asc"
+
+- name: Add Claude Desktop repository
+  become: true
+  tags: claude-desktop
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64,arm64 signed-by={{ KEYRINGS_PATH }}/claude-desktop.asc] https://downloads.claude.ai/claude-desktop/apt/stable stable main"
+    filename: claude-desktop
+    state: present
+    update_cache: true
+
+- name: Install Claude Desktop
+  become: true
+  tags: claude-desktop
+  ansible.builtin.apt:
+    name: claude-desktop
+    state: latest
+
+# cowork を使うために仮想化の設定が必要
+- name: Add user to kvm group for Cowork virtualization
+  become: true
+  tags: claude-desktop
+  ansible.builtin.user:
+    name: "{{ ansible_facts['env']['USER'] }}"
+    groups: kvm
+    append: true
+    state: present
+  notify:
+    - Notify Re-login
+
+# ref. https://code.claude.com/docs/ja/desktop-linux

@@ -1,0 +1,3 @@
+- name: Notify Re-login
+  ansible.builtin.debug:
+    msg: "再ログインすることでユーザーの kvm グループが有効になり、Cowork が利用可能になります"

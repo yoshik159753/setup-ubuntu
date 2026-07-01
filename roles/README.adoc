@@ -280,6 +280,10 @@ a|プログラミング言語
 |Anthropic の Claude Code CLI ツール
 |-
 
+|claude-desktop
+|Anthropic の Claude デスクトップアプリ(ベータ版)
+|-
+
 |losslesscut
 |動画・音声のロスレスカット編集ツール
 |-
