@@ -280,11 +280,23 @@ a|プログラミング言語
 |Anthropic の Claude Code CLI ツール
 |-
 
+|claude-desktop
+|Anthropic の Claude デスクトップアプリ(ベータ版)
+|-
+
 |losslesscut
 |動画・音声のロスレスカット編集ツール
 |-
 
 |fzf
 |コマンドライン用ファジーファインダー
+|-
+
+|macos-like-dock
+|ドックを macOS のように表示する設定
+|-
+
+|clamshell-mode
+|蓋を閉じてもサスペンドしない設定(クラムシェルモード)
 |-
 |===

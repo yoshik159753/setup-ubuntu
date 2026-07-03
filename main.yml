@@ -57,5 +57,8 @@
     - FileZilla
     - gcloud-cli
     - claude-code
+    - claude-desktop
     - losslesscut
     - fzf
+    - macos-like-dock
+    - clamshell-mode
