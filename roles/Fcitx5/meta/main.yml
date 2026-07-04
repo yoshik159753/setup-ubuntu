@@ -1,0 +1,2 @@
+dependencies:
+  - role: make-autostart-directory

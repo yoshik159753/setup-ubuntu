@@ -1,0 +1,72 @@
+- name: Install Fcitx5 and Mozc
+  become: true
+  tags: fcitx5
+  ansible.builtin.apt:
+    name:
+      - fcitx5
+      - fcitx5-mozc
+    state: present
+
+- name: Check current input method
+  tags: fcitx5
+  ansible.builtin.command:
+    cmd: im-config -m
+  register: im_current
+  changed_when: false
+
+- name: Switch input method system to Fcitx5
+  tags: fcitx5
+  ansible.builtin.command:
+    cmd: im-config -n fcitx5
+  when: "'fcitx5' not in im_current.stdout"
+  notify:
+    - Notify re-login for IM system switch
+
+- name: Ensure Fcitx5 config directory exists
+  tags: fcitx5
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/fcitx5"
+    state: directory
+    mode: "0755"
+
+- name: Configure Fcitx5 input methods (add Mozc)
+  tags: fcitx5
+  ansible.builtin.copy:
+    src: profile
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/fcitx5/profile"
+    mode: "0644"
+
+- name: Enable Fcitx5 autostart
+  tags: fcitx5
+  ansible.builtin.copy:
+    src: fcitx5.desktop
+    dest: "{{ GNOME_USER_AUTOSTART_DIRECTORY }}/fcitx5.desktop"
+    mode: "0644"
+  when: GNOME_USER_AUTOSTART_DIRECTORY is defined
+
+- name: Ensure user XKB symbols directory exists
+  tags: fcitx5
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/xkb/symbols"
+    state: directory
+    mode: "0755"
+
+- name: Copy system US keyboard layout to user XKB directory
+  tags: fcitx5
+  ansible.builtin.copy:
+    src: /usr/share/X11/xkb/symbols/us
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/xkb/symbols/us"
+    remote_src: true
+    force: false
+    mode: "0644"
+
+- name: Swap semicolon and colon on US keyboard layout (AC10 key)
+  tags: fcitx5
+  ansible.builtin.replace:
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/xkb/symbols/us"
+    regexp: 'key\s*<AC10>\s*\{\s*\[\s*semicolon,\s*colon\s*\]\s*\}'
+    replace: "key <AC10> { [ colon, semicolon ] }"
+  notify:
+    - Notify keyboard layout reload
+
+# ref. https://fcitx-im.org/wiki/Fcitx_5
