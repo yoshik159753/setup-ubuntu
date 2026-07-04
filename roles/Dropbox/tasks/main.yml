@@ -22,3 +22,4 @@
     state: present
   notify:
     - Notification about installation
+    - Notification about excluded directories

@@ -1,3 +1,7 @@
 - name: Notification about installation
   ansible.builtin.debug:
     msg: "少々待つとインストーラーが起動するはずなので指示に従ってください"
+
+- name: Notification about excluded directories
+  ansible.builtin.debug:
+    msg: "同期を開始する前に、必要に応じて同期を除外するディレクトリを設定してください"
