@@ -1,0 +1,7 @@
+- name: Notify re-login for IM system switch
+  ansible.builtin.debug:
+    msg: "再ログインすることで入力メソッドシステムの変更(Fcitx5)が有効になります"
+
+- name: Notify keyboard layout reload
+  ansible.builtin.debug:
+    msg: "再ログインするとキーボードレイアウト変更 (AC10: コロン/セミコロン入れ替え) が反映されます"

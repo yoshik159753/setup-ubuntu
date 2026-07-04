@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/fcitx5 --replace -d
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[ja]=Fcitx5
+Name=Fcitx5
+Comment[ja]=入力メソッドを開始
+Comment=Start Input Method
