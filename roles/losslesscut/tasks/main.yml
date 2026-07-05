@@ -4,3 +4,17 @@
   community.general.snap:
     name: losslesscut
     state: present
+
+- name: Check losslesscut snap connections
+  tags: losslesscut
+  ansible.builtin.command:
+    cmd: snap connections losslesscut
+  register: snap_connections
+  changed_when: false
+
+- name: Connect losslesscut to removable-media interface
+  become: true
+  tags: losslesscut
+  ansible.builtin.command:
+    cmd: snap connect losslesscut:removable-media
+  when: "'removable-media' not in snap_connections.stdout"
