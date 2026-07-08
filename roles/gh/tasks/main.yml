@@ -1,0 +1,24 @@
+- name: Add apt key for gh
+  become: true
+  tags: gh
+  ansible.builtin.get_url:
+    url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+    dest: "{{ KEYRINGS_PATH }}/gh.gpg"
+
+- name: Add specified repository into sources list
+  become: true
+  tags: gh
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/gh.gpg] https://cli.github.com/packages stable main"
+    filename: github-cli
+    state: present
+    update_cache: true
+
+- name: Install gh
+  become: true
+  tags: gh
+  ansible.builtin.apt:
+    name: gh
+    state: present
+
+# ref. https://github.com/cli/cli/blob/trunk/docs/install_linux.md
