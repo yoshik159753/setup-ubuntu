@@ -65,6 +65,10 @@ a|Version Control System
 * gsw alias (git switch + fzf)
 |fzf
 
+|gh
+|GitHub CLI
+|-
+
 |inputrc
 |bash による補完時の大文字小文字を無視
 |-
