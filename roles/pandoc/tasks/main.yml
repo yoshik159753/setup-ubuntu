@@ -5,13 +5,11 @@
     name: pandoc
     state: latest
 
-- name: Install PDF conversion packages
+- name: Install WeasyPrint
   become: true
   tags: pandoc
   ansible.builtin.apt:
-    name:
-      - texlive-xetex
-      - texlive-latex-recommended
-      - texlive-lang-japanese
-      - fonts-noto-cjk
+    name: weasyprint
     state: present
+
+# ref. https://weasyprint.org/start/
