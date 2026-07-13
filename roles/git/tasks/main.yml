@@ -83,3 +83,7 @@
     - { name: 'core.quotepath', value: 'false' }
     - { name: 'fetch.prune', value: 'true' }
     - { name: 'core.commentchar', value: ';' }
+    - { name: 'diff.tool', value: 'vscode' }
+    - { name: 'difftool.vscode.cmd', value: 'code --wait --diff $LOCAL $REMOTE' }
+    - { name: 'difftool.prompt', value: 'false' }
+    - { name: 'alias.dft', value: 'difftool' }
