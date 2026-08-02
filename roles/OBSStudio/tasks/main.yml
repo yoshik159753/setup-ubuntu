@@ -1,43 +1,51 @@
-- name: Add apt key
-  become: true
+- when: IS_UBUNTU
   tags: obsstudio
-  ansible.builtin.get_url:
-    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xbc7345f522079769f5bbe987efc71127f425e228
-    dest: "{{ KEYRINGS_PATH }}/obsproject.asc"
+  block:
+    - name: Add apt key
+      become: true
+      ansible.builtin.get_url:
+        url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xbc7345f522079769f5bbe987efc71127f425e228
+        dest: "{{ KEYRINGS_PATH }}/obsproject.asc"
 
-- name: Add specified repository into sources list
-  become: true
-  tags: obsstudio
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ KEYRINGS_PATH }}/obsproject.asc] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
-    filename: obsproject
-    state: present
-    update_cache: true
+    - name: Add specified repository into sources list
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by={{ KEYRINGS_PATH }}/obsproject.asc] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
+        filename: obsproject
+        state: present
+        update_cache: true
 
-- name: Add specified repository into sources list (src)
-  become: true
-  tags: obsstudio
-  ansible.builtin.apt_repository:
-    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/obsproject.asc] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
-    filename: obsproject
-    state: present
-    update_cache: true
+    - name: Add specified repository into sources list (src)
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/obsproject.asc] https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
+        filename: obsproject
+        state: present
+        update_cache: true
 
-- name: Install OBS studio
-  become: true
-  tags: obsstudio
-  ansible.builtin.apt:
-    name: obs-studio
-    state: present
-    update_cache: true
+    - name: Install OBS studio
+      become: true
+      ansible.builtin.apt:
+        name: obs-studio
+        state: present
+        update_cache: true
 
-- name: Install ndi plugin for OBS studio
-  become: true
+    - name: Install ndi plugin for OBS studio
+      become: true
+      ansible.builtin.apt:
+        deb: "{{ item }}"
+        state: present
+      loop:
+        - https://github.com/Palakis/obs-ndi/releases/download/4.9.1/libndi4_4.5.1-1_amd64.deb
+        - https://github.com/Palakis/obs-ndi/releases/download/4.9.1/obs-ndi_4.9.1-1_amd64.deb
+      ignore_errors: "{{ ansible_check_mode }}"
+
+- when: IS_STEAMOS
   tags: obsstudio
-  ansible.builtin.apt:
-    deb: "{{ item }}"
-    state: present
-  loop:
-    - https://github.com/Palakis/obs-ndi/releases/download/4.9.1/libndi4_4.5.1-1_amd64.deb
-    - https://github.com/Palakis/obs-ndi/releases/download/4.9.1/obs-ndi_4.9.1-1_amd64.deb
-  ignore_errors: "{{ ansible_check_mode }}"
+  block:
+    - name: Install OBS studio (flatpak)
+      community.general.flatpak:
+        name: com.obsproject.Studio
+        state: present
+        method: system
+      # NDI プラグインは Flathub 版には同梱されていないため未対応
