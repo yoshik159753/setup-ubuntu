@@ -1,0 +1,21 @@
+# ansible-playbook -i localhost, --connection local main-steamos.yml
+- hosts:
+    - localhost
+  vars:
+    IS_UBUNTU: false
+    IS_STEAMOS: true
+    GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_facts['env']['HOME'] }}/.config/autostart"
+  roles:
+    - MKVToolNix
+    - Audacity
+    - Brasero
+    - EasyTAG
+    - FileZilla
+    - Geeqie
+    - GoogleChrome
+    - losslesscut
+    - meld
+    - SoundConverter
+    - VLC
+    - Asunder
+    - Dropbox
