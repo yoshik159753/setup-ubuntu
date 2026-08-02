@@ -1,0 +1,6 @@
+- name: Install jq
+  become: true
+  tags: jq
+  ansible.builtin.apt:
+    name: jq
+    state: present
