@@ -1,25 +1,42 @@
-- name: Add apt key
-  become: true
+- when: IS_UBUNTU
   tags: dropbox
-  ansible.builtin.get_url:
-    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x1c61a2656fb57b7e4de0f4c1fc918b335044912e
-    dest: "{{ KEYRINGS_PATH }}/dropbox.asc"
+  block:
+    - name: Add apt key
+      become: true
+      ansible.builtin.get_url:
+        url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x1c61a2656fb57b7e4de0f4c1fc918b335044912e
+        dest: "{{ KEYRINGS_PATH }}/dropbox.asc"
 
-- name: Add specified repository into sources list
-  become: true
-  tags: dropbox
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ KEYRINGS_PATH }}/dropbox.asc] https://linux.dropbox.com/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
-    filename: dropbox
-    state: present
-    update_cache: true
+    - name: Add specified repository into sources list
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by={{ KEYRINGS_PATH }}/dropbox.asc] https://linux.dropbox.com/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
+        filename: dropbox
+        state: present
+        update_cache: true
 
-- name: Install dropbox
-  become: true
+    - name: Install dropbox
+      become: true
+      ansible.builtin.apt:
+        name: dropbox
+        state: present
+      notify:
+        - Notification about installation
+        - Notification about excluded directories
+
+- when: IS_STEAMOS
   tags: dropbox
-  ansible.builtin.apt:
-    name: dropbox
-    state: present
-  notify:
-    - Notification about installation
-    - Notification about excluded directories
+  block:
+    - name: Install dropbox (flatpak)
+      community.general.flatpak:
+        name: com.dropbox.Client
+        state: present
+        method: system
+      notify:
+        - Notification about excluded directories
+
+    - name: Copy autostart configuration file
+      ansible.builtin.copy:
+        src: dropbox-flatpak.desktop
+        dest: "{{ GNOME_USER_AUTOSTART_DIRECTORY }}/dropbox-flatpak.desktop"
+      when: GNOME_USER_AUTOSTART_DIRECTORY is defined
