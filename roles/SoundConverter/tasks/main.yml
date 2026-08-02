@@ -1,7 +1,18 @@
-- name: Install soundconverter
-  become: true
+- when: IS_UBUNTU
   tags: soundconverter
-  ansible.builtin.apt:
-    name: soundconverter
-    state: present
-    update_cache: true
+  block:
+    - name: Install soundconverter
+      become: true
+      ansible.builtin.apt:
+        name: soundconverter
+        state: present
+        update_cache: true
+
+- when: IS_STEAMOS
+  tags: soundconverter
+  block:
+    - name: Install soundconverter (flatpak)
+      community.general.flatpak:
+        name: org.soundconverter.SoundConverter
+        state: present
+        method: system
