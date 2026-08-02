@@ -1,8 +1,21 @@
-- name: Install asunder
-  become: true
+- when: IS_UBUNTU
   tags: asunder
-  ansible.builtin.apt:
-    name: asunder
-    state: present
-  notify:
-    - Notification about the cdrom device
+  block:
+    - name: Install asunder
+      become: true
+      ansible.builtin.apt:
+        name: asunder
+        state: present
+      notify:
+        - Notification about the cdrom device
+
+- when: IS_STEAMOS
+  tags: asunder
+  block:
+    - name: Install asunder (flatpak)
+      community.general.flatpak:
+        name: ca.littlesvr.asunder
+        state: present
+        method: system
+      notify:
+        - Notification about the cdrom device
