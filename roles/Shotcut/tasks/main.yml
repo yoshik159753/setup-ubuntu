@@ -1,7 +1,18 @@
-- name: Install shotcut
-  become: true
+- when: IS_UBUNTU
   tags: shotcut
-  community.general.snap:
-    name: shotcut
-    classic: true
-    state: present
+  block:
+    - name: Install shotcut
+      become: true
+      community.general.snap:
+        name: shotcut
+        classic: true
+        state: present
+
+- when: IS_STEAMOS
+  tags: shotcut
+  block:
+    - name: Install shotcut (flatpak)
+      community.general.flatpak:
+        name: org.shotcut.Shotcut
+        state: present
+        method: system
