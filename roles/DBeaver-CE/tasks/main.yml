@@ -1,32 +1,40 @@
-- name: Add apt key
-  become: true
+- when: IS_UBUNTU
   tags: dbeaver-ce
-  ansible.builtin.get_url:
-    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x30ece32520d438c21e16bf884a71b51882788fd2
-    dest: "{{ KEYRINGS_PATH }}/dbeaver_ce.asc"
+  block:
+    - name: Add apt key
+      become: true
+      ansible.builtin.get_url:
+        url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x30ece32520d438c21e16bf884a71b51882788fd2
+        dest: "{{ KEYRINGS_PATH }}/dbeaver_ce.asc"
 
-- name: Add specified repository into sources list
-  become: true
-  tags: dbeaver-ce
-  ansible.builtin.apt_repository:
-    repo: "deb [signed-by={{ KEYRINGS_PATH }}/dbeaver_ce.asc] https://ppa.launchpadcontent.net/serge-rider/dbeaver-ce/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
-    filename: dbeaver_ce
-    state: present
-    update_cache: true
+    - name: Add specified repository into sources list
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by={{ KEYRINGS_PATH }}/dbeaver_ce.asc] https://ppa.launchpadcontent.net/serge-rider/dbeaver-ce/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
+        filename: dbeaver_ce
+        state: present
+        update_cache: true
 
-- name: Add specified repository into sources list (src)
-  become: true
-  tags: dbeaver-ce
-  ansible.builtin.apt_repository:
-    repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/dbeaver_ce.asc] https://ppa.launchpadcontent.net/serge-rider/dbeaver-ce/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
-    filename: dbeaver_ce
-    state: present
-    update_cache: true
+    - name: Add specified repository into sources list (src)
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb-src [signed-by={{ KEYRINGS_PATH }}/dbeaver_ce.asc] https://ppa.launchpadcontent.net/serge-rider/dbeaver-ce/ubuntu {{ ansible_facts['lsb']['codename'] }} main"
+        filename: dbeaver_ce
+        state: present
+        update_cache: true
 
-- name: Install dbeaver-ce
-  become: true
+    - name: Install dbeaver-ce
+      become: true
+      ansible.builtin.apt:
+        name: dbeaver-ce
+        state: present
+        update_cache: true
+
+- when: IS_STEAMOS
   tags: dbeaver-ce
-  ansible.builtin.apt:
-    name: dbeaver-ce
-    state: present
-    update_cache: true
+  block:
+    - name: Install dbeaver-ce (flatpak)
+      community.general.flatpak:
+        name: io.dbeaver.DBeaverCommunity
+        state: present
+        method: system
