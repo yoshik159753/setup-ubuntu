@@ -1,6 +1,17 @@
-- name: Install Brasero
-  become: true
+- when: IS_UBUNTU
   tags: brasero
-  ansible.builtin.apt:
-    name: brasero
-    state: present
+  block:
+    - name: Install Brasero
+      become: true
+      ansible.builtin.apt:
+        name: brasero
+        state: present
+
+- when: IS_STEAMOS
+  tags: brasero
+  block:
+    - name: Install Brasero (flatpak)
+      community.general.flatpak:
+        name: org.gnome.Brasero
+        state: present
+        method: system
