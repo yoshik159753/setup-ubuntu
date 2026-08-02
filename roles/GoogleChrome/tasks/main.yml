@@ -1,25 +1,34 @@
-- name: Add apt key for GoogleChrome
-  become: true
+- when: IS_UBUNTU
   tags: googlechrome
-  ansible.builtin.get_url:
-    url: https://dl.google.com/linux/linux_signing_key.pub
-    dest: "{{ KEYRINGS_PATH }}/google.asc"
+  block:
+    - name: Add apt key for GoogleChrome
+      become: true
+      ansible.builtin.get_url:
+        url: https://dl.google.com/linux/linux_signing_key.pub
+        dest: "{{ KEYRINGS_PATH }}/google.asc"
 
-- name: Add specified repository into sources list
-  become: true
-  tags: googlechrome
-  ansible.builtin.apt_repository:
-    repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/google.asc] https://dl.google.com/linux/chrome/deb/ stable main'
-    filename: google-chrome
-    state: present
-    update_cache: true
+    - name: Add specified repository into sources list
+      become: true
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/google.asc] https://dl.google.com/linux/chrome/deb/ stable main'
+        filename: google-chrome
+        state: present
+        update_cache: true
 
-- name: Install GoogleChrome
-  become: true
+    - name: Install GoogleChrome
+      become: true
+      ansible.builtin.apt:
+        name: google-chrome-stable
+        state: present
+
+- when: IS_STEAMOS
   tags: googlechrome
-  ansible.builtin.apt:
-    name: google-chrome-stable
-    state: present
+  block:
+    - name: Install GoogleChrome (flatpak)
+      community.general.flatpak:
+        name: com.google.Chrome
+        state: present
+        method: system
 
 # ref. https://www.google.com/linuxrepositories/
 #      http://www.ubuntuupdates.org/ppa/google_chrome
