@@ -1,6 +1,17 @@
-- name: Install VLC
-  become: true
+- when: IS_UBUNTU
   tags: vlc
-  ansible.builtin.apt:
-    name: vlc
-    state: present
+  block:
+    - name: Install VLC
+      become: true
+      ansible.builtin.apt:
+        name: vlc
+        state: present
+
+- when: IS_STEAMOS
+  tags: vlc
+  block:
+    - name: Install VLC (flatpak)
+      community.general.flatpak:
+        name: org.videolan.VLC
+        state: present
+        method: system
