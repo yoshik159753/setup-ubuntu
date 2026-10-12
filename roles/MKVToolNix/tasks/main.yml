@@ -1,36 +1,44 @@
-- name: Add apt key
-  become: true
+- when: IS_UBUNTU
   tags: mkvtoolnix
-  ansible.builtin.get_url:
-    url: https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt
-    dest: "{{ KEYRINGS_PATH }}/mkvtoolnix.asc"
+  block:
+    - name: Add apt key
+      become: true
+      ansible.builtin.get_url:
+        url: https://mkvtoolnix.download/gpg-pub-moritzbunkus.txt
+        dest: "{{ KEYRINGS_PATH }}/mkvtoolnix.asc"
 
-- name: Add specified repository into sources list
-  become: true
-  tags: mkvtoolnix
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_facts['distribution_release'] }} main"
-    filename: mkvtoolnix.download
-    state: present
-    update_cache: true
+    - name: Add specified repository into sources list
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_facts['distribution_release'] }} main"
+        filename: mkvtoolnix.download
+        state: present
+        update_cache: true
 
-- name: Add specified repository into sources list (src)
-  become: true
-  tags: mkvtoolnix
-  ansible.builtin.apt_repository:
-    repo: "deb-src [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_facts['distribution_release'] }} main"
-    filename: mkvtoolnix.download
-    state: present
-    update_cache: true
+    - name: Add specified repository into sources list (src)
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "deb-src [arch=amd64 signed-by={{ KEYRINGS_PATH }}/mkvtoolnix.asc] https://mkvtoolnix.download/ubuntu/ {{ ansible_facts['distribution_release'] }} main"
+        filename: mkvtoolnix.download
+        state: present
+        update_cache: true
 
-- name: Install MKVToolNix
-  become: true
+    - name: Install MKVToolNix
+      become: true
+      ansible.builtin.apt:
+        name:
+          - mkvtoolnix
+          - mkvtoolnix-gui
+        state: present
+        update_cache: true
+
+- when: IS_STEAMOS
   tags: mkvtoolnix
-  ansible.builtin.apt:
-    name:
-      - mkvtoolnix
-      - mkvtoolnix-gui
-    state: present
-    update_cache: true
+  block:
+    - name: Install MKVToolNix (flatpak)
+      community.general.flatpak:
+        name: org.bunkus.mkvtoolnix-gui
+        state: present
+        method: system
 
 # ref. https://mkvtoolnix.download/index.html

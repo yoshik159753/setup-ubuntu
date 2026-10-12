@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=flatpak run com.dropbox.Client
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[ja]=Dropbox
+Name=Dropbox
+Comment[ja]=
+Comment=

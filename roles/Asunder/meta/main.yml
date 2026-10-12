@@ -1,3 +1,4 @@
 ---
 dependencies:
   - role: MP3EncodingLibrary
+    when: IS_UBUNTU

@@ -1,6 +1,17 @@
-- name: Install filezilla
-  become: true
+- when: IS_UBUNTU
   tags: filezilla
-  ansible.builtin.apt:
-    name: filezilla
-    state: present
+  block:
+    - name: Install filezilla
+      become: true
+      ansible.builtin.apt:
+        name: filezilla
+        state: present
+
+- when: IS_STEAMOS
+  tags: filezilla
+  block:
+    - name: Install filezilla (flatpak)
+      community.general.flatpak:
+        name: org.filezillaproject.Filezilla
+        state: present
+        method: system

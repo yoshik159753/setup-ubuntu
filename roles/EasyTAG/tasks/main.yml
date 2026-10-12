@@ -1,6 +1,17 @@
-- name: Install EasyTAG
-  become: true
+- when: IS_UBUNTU
   tags: easytag
-  ansible.builtin.apt:
-    name: easytag
-    state: present
+  block:
+    - name: Install EasyTAG
+      become: true
+      ansible.builtin.apt:
+        name: easytag
+        state: present
+
+- when: IS_STEAMOS
+  tags: easytag
+  block:
+    - name: Install EasyTAG (flatpak)
+      community.general.flatpak:
+        name: org.gnome.EasyTAG
+        state: present
+        method: system

@@ -1,20 +1,29 @@
-- name: Install losslesscut
-  become: true
+- when: IS_UBUNTU
   tags: losslesscut
-  community.general.snap:
-    name: losslesscut
-    state: present
+  block:
+    - name: Install losslesscut
+      become: true
+      community.general.snap:
+        name: losslesscut
+        state: present
 
-- name: Check losslesscut snap connections
-  tags: losslesscut
-  ansible.builtin.command:
-    cmd: snap connections losslesscut
-  register: snap_connections
-  changed_when: false
+    - name: Check losslesscut snap connections
+      ansible.builtin.command:
+        cmd: snap connections losslesscut
+      register: snap_connections
+      changed_when: false
 
-- name: Connect losslesscut to removable-media interface
-  become: true
+    - name: Connect losslesscut to removable-media interface
+      become: true
+      ansible.builtin.command:
+        cmd: snap connect losslesscut:removable-media
+      when: "'removable-media' not in snap_connections.stdout"
+
+- when: IS_STEAMOS
   tags: losslesscut
-  ansible.builtin.command:
-    cmd: snap connect losslesscut:removable-media
-  when: "'removable-media' not in snap_connections.stdout"
+  block:
+    - name: Install losslesscut (flatpak)
+      community.general.flatpak:
+        name: no.mifi.losslesscut
+        state: present
+        method: system

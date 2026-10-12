@@ -1,0 +1,9 @@
+- when: IS_UBUNTU
+  tags: fonts
+  block:
+    - name: Install fonts
+      become: true
+      ansible.builtin.apt:
+        name:
+          - fonts-ubuntu
+        state: present

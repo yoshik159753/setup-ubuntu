@@ -1,6 +1,17 @@
-- name: Install Audacity
-  become: true
+- when: IS_UBUNTU
   tags: audacity
-  ansible.builtin.apt:
-    name: audacity
-    state: present
+  block:
+    - name: Install Audacity
+      become: true
+      ansible.builtin.apt:
+        name: audacity
+        state: present
+
+- when: IS_STEAMOS
+  tags: audacity
+  block:
+    - name: Install Audacity (flatpak)
+      community.general.flatpak:
+        name: org.audacityteam.Audacity
+        state: present
+        method: system

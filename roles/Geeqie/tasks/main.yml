@@ -1,6 +1,17 @@
-- name: Install Geeqie
-  become: true
+- when: IS_UBUNTU
   tags: geeqie
-  ansible.builtin.apt:
-    name: geeqie
-    state: present
+  block:
+    - name: Install Geeqie
+      become: true
+      ansible.builtin.apt:
+        name: geeqie
+        state: present
+
+- when: IS_STEAMOS
+  tags: geeqie
+  block:
+    - name: Install Geeqie (flatpak)
+      community.general.flatpak:
+        name: org.geeqie.Geeqie
+        state: present
+        method: system

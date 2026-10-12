@@ -55,12 +55,12 @@
       settings="{{ ansible_facts['env']['HOME'] }}/.claude/settings.json"
       cmd="bash {{ ansible_facts['env']['HOME'] }}/.claude/statusline-command.sh"
       current=""
-      [ -f "$settings" ] && current=$(jq -r '.statusLine.command // ""' "$settings" 2>/dev/null)
+      [ -s "$settings" ] && current=$(jq -r '.statusLine.command // ""' "$settings" 2>/dev/null)
       if [ "$current" = "$cmd" ]; then
         echo "unchanged"
       else
         tmp=$(mktemp)
-        if [ -f "$settings" ]; then
+        if [ -s "$settings" ]; then
           jq --arg c "$cmd" '.statusLine = {"type": "command", "command": $c}' "$settings" > "$tmp"
         else
           jq -n --arg c "$cmd" '{"statusLine": {"type": "command", "command": $c}}' > "$tmp"

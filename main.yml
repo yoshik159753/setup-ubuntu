@@ -4,6 +4,8 @@
     USR_LOCAL_BIN: "/usr/local/bin"
     KEYRINGS_PATH: "/etc/apt/keyrings"
     GNOME_USER_AUTOSTART_DIRECTORY: "{{ ansible_facts['env']['HOME'] }}/.config/autostart"
+    IS_UBUNTU: "{{ ansible_facts['distribution'] == 'Ubuntu' }}"
+    IS_STEAMOS: "{{ ansible_facts['distribution'] == 'SteamOS' }}"
   roles:
     - Audacity
     - Docker

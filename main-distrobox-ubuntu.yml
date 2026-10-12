@@ -1,0 +1,16 @@
+# ansible-playbook -i localhost, --connection local main-distrobox-ubuntu.yml
+- hosts:
+    - localhost
+  vars:
+    KEYRINGS_PATH: "/etc/apt/keyrings"
+    IS_UBUNTU: true
+  roles:
+    - VisualStudioCode
+    - Nodejs
+    - claude-code
+    - claude-desktop
+    - git
+    - gh
+    - LibreOffice
+    - Python
+    - Vim

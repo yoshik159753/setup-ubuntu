@@ -1,0 +1,20 @@
+- when: IS_UBUNTU
+  tags: libreoffice
+  block:
+    - name: Install LibreOffice
+      become: true
+      ansible.builtin.apt:
+        name: libreoffice
+        state: present
+
+    - name: Install LibreOffice Japanese language pack
+      become: true
+      ansible.builtin.apt:
+        name: libreoffice-l10n-ja
+        state: present
+
+    - name: Generate ja_JP.UTF-8 locale
+      become: true
+      community.general.locale_gen:
+        name: ja_JP.UTF-8
+        state: present
